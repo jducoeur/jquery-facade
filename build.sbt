@@ -53,4 +53,3 @@ pomExtra := (
 )
 
 pomIncludeRepository := { _ => false }
-
