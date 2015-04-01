@@ -89,6 +89,12 @@ trait JQueryEventObject extends Event {
 /**
  * Constructor facade for JQueryEventObject. See the documentation of the JQueryEventObject trait for more
  * information about the various constructor methods.
+ * 
+ * TBD: does this need to use jsext? Possibly not. Look at this more closely, and see if switching to a more
+ * straightforward constructor is more appropriate in this case. If all of the parameters are singly-typed,
+ * then jsext is overkill.
+ * 
+ * In general, this is rather half-baked, and needs enhancement and sanity-checking.
  */
 object JQueryEventObject extends JQueryEventObjectBuilder(noOpts)
 class JQueryEventObjectBuilder(val dict:OptMap) extends JSOptionBuilder[JQueryEventObject, JQueryEventObjectBuilder](new JQueryEventObjectBuilder(_)) {
