@@ -34,6 +34,8 @@ import dom.Element
  * Also: when a facade function takes a property bag, if it is understood to be name/value pairs
  * in JS, declare it as js.Dictionary[T]. Often, we can constrain T; if not, just put js.Any, and it
  * is at least explicit that it is name/value pairs.
+ * 
+ * TODO: we should probably mark the XXXInternal methods as private [jquery]. See if that works.
  */
 trait JQuery extends js.Object {
   /**
