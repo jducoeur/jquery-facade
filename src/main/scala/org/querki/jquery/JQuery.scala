@@ -45,7 +45,7 @@ trait JQuery extends js.Object {
   def addClass(func:js.ThisFunction2[Element, Int, String, String]):JQuery = js.native
   
   @JSName("after")
-  def afterInternal(content:js.Any):JQuery = js.native
+  def afterInternal(content:js.Any*):JQuery = js.native
   
   @JSName("append")
   def appendInternal(content:js.Any*):JQuery = js.native
@@ -128,6 +128,16 @@ trait JQuery extends js.Object {
    */
   def data(): js.Dictionary[js.Any] = js.native
   
+  /**
+   * Bind an event handler to the "dblclick" JavaScript event.
+   *
+   * This is the simpler version, and usually what you want.
+   */
+  def dblclick(func:js.ThisFunction0[Element, Any]):JQuery = js.native
+  def dblclick(func:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  def dblclick(func:js.Function1[JQueryEventObject, Any]):JQuery = js.native
+  def dblclick(func:js.Function0[Any]):JQuery = js.native
+
   /**
    * Set a timer to delay execution of subsequent items in the queue.
    */
@@ -216,6 +226,17 @@ trait JQuery extends js.Object {
   def hide(duration:Int, easing:String, complete:js.Function):JQuery = js.native
   // TODO: add the complex version of hide(), with a Builder to construct the Options.
   
+  /**
+   * Get the HTML contents of the first element in the set of matched elements.
+   */
+  def html():String = js.native
+  /**
+   * Set the HTML contents of every matched element.
+   */
+  def html(t:String):JQuery = js.native
+  // TBD: the JQ docs don't say that this is a ThisFunction. Is it?
+  def html(func:js.Function2[Int, String, String]):JQuery = js.native
+
   @JSName("index")
   def indexInternal():Int = js.native
   @JSName("index")
@@ -391,14 +412,18 @@ trait JQuery extends js.Object {
    */
   def slideDown():JQuery = js.native
   def slideDown(duration:String):JQuery = js.native
+  def slideDown(duration:String, complete:js.Function):JQuery = js.native
   def slideDown(duration:Int):JQuery = js.native
+  def slideDown(duration:Int, complete:js.Function):JQuery = js.native
   
   /**
    * Hide the matched elements with a sliding motion.
    */
   def slideUp():JQuery = js.native
   def slideUp(duration:String):JQuery = js.native
+  def slideUp(duration:String, complete:js.Function):JQuery = js.native
   def slideUp(duration:Int):JQuery = js.native
+  def slideUp(duration:Int, complete:js.Function):JQuery = js.native
   
   /**
    * Get the combined text contents of each element in the set of matched elements, including their descendants.

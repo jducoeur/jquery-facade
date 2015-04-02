@@ -17,7 +17,7 @@ class JQueryTyped(jq:JQuery) {
   /**
    * Insert content, specified by the parameter, after each element in the set of matched elements.
    */
-  def after(content:ElementDesc):JQuery = jq.afterInternal(toJsAny(content))
+  def after(content:ElementDesc*):JQuery = jq.afterInternal(content.map(toJsAny(_)):_*)
   def after(func:js.ThisFunction0[Element, ElementDesc]):JQuery = jq.afterInternal(func)
   def after(func:js.ThisFunction1[Element, Int, ElementDesc]):JQuery =  jq.afterInternal(func)
   
@@ -83,7 +83,7 @@ class JQueryTyped(jq:JQuery) {
   /**
    * Insert content, specified by the parameters, to the beginning of each element in the set of matched elements.
    */
-  def prepend(contents:Selector*):JQuery = jq.prependInternal(contents.map(toJsAny(_)):_*)
+  def prepend(contents:ElementDesc*):JQuery = jq.prependInternal(contents.map(toJsAny(_)):_*)
   def prepend(func:js.ThisFunction2[Element, Int, String, Selector]):JQuery = jq.prependInternal(func)
   
   /**
