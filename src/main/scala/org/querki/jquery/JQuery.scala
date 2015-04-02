@@ -234,8 +234,7 @@ trait JQuery extends js.Object {
    * Set the HTML contents of every matched element.
    */
   def html(t:String):JQuery = js.native
-  // TBD: the JQ docs don't say that this is a ThisFunction. Is it?
-  def html(func:js.Function2[Int, String, String]):JQuery = js.native
+  def html(func:js.ThisFunction2[Element, Int, String, String]):JQuery = js.native
 
   @JSName("index")
   def indexInternal():Int = js.native
@@ -433,7 +432,7 @@ trait JQuery extends js.Object {
    * Set the content of each element in the set of matched elements to the specified text.
    */
   def text(t:String):JQuery = js.native
-  // TBD: the JQ docs don't say that this is a ThisFunction. Is it?
+  // TBD: the JQ docs don't say that this is a ThisFunction. Is it? Probably, based on html()?
   def text(func:js.Function2[Int, String, String]):JQuery = js.native
   
   /**
