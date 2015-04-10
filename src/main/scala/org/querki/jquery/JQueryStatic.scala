@@ -18,4 +18,7 @@ object JQueryStatic extends js.Object {
   def apply(): JQuery = js.native
   
   var expr: js.Dynamic = js.native
+  
+  def Event(name:String):JQueryEventObject = js.native
+  def Event(name:String, init:JQueryEventObject):JQueryEventObject = js.native
 }

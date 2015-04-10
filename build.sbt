@@ -9,7 +9,7 @@ name := "jQuery Facade"
 
 normalizedName := "jquery-facade"
 
-version := "0.2"
+version := "0.3-SNAPSHOT"
 
 organization := "org.querki"
 
