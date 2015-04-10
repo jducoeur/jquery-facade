@@ -1,3 +1,7 @@
+import SonatypeKeys._
+
+sonatypeSettings
+
 lazy val root = project.in(file(".")).
   enablePlugins(ScalaJSPlugin)
 
@@ -5,7 +9,7 @@ name := "jQuery Facade"
 
 normalizedName := "jquery-facade"
 
-version := "0.2-SNAPSHOT"
+version := "0.2"
 
 organization := "org.querki"
 
@@ -14,7 +18,7 @@ scalaVersion := "2.11.6"
 crossScalaVersions := Seq("2.10.4", "2.11.5")
 
 libraryDependencies ++= Seq(
-  "org.querki" %%% "querki-jsext" % "0.1",
+  "org.querki" %%% "querki-jsext" % "0.2",
   "org.scala-js" %%% "scalajs-dom" % "0.8.0"
 )
 
