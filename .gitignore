@@ -39,6 +39,11 @@ local.properties
 # PDT-specific
 .buildpath
 
+#################
+## IntelliJ IDEA
+#################
+
+.idea
 
 #################
 ## Visual Studio

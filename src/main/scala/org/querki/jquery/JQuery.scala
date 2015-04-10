@@ -242,6 +242,18 @@ trait JQuery extends js.Object {
   @JSName("index")
   def indexInternal(selector:js.Any):Int = js.native
 
+  /**
+   * Get the current computed inner height (including padding but not border) for the first element
+   * in the set of matched elements.
+   */
+  def innerHeight():Double = js.native
+
+  /**
+   * Get the current computed inner width (including padding but not border) for the first element
+   * in the set of matched elements.
+   */
+  def innerWidth():Double = js.native
+
   @JSName("insertBefore")
   def insertBeforeInternal(selector:js.Any):JQuery = js.native
   
@@ -334,6 +346,20 @@ trait JQuery extends js.Object {
   def on(eventsMap: js.Dictionary[js.ThisFunction1[Element, JQueryEventObject, Any]]): JQuery = js.native
 
   /**
+   * Get the current computed height for the first element in the set of matched elements, including
+   * padding, border, and optionally margin.
+   */
+  def outerHeight():Double = js.native
+  def outerHeight(includeMargin:Boolean):Double = js.native
+
+  /**
+   * Get the current computed width for the first element in the set of matched elements, including
+   * padding, border, and optionally margin.
+   */
+  def outerWidth():Double = js.native
+  def outerWidth(includeMargin:Boolean):Double = js.native
+
+  /**
    * Get the parent of each element in the current set of matched elements, optionally filtered by a selector.
    * 
    * TBD: is the parameter really a Selector, or just a String? The JQuery API docs are unclear.
@@ -379,7 +405,15 @@ trait JQuery extends js.Object {
   
   @JSName("replaceWith")
   def replaceWithInternal(content:js.Any):JQuery = js.native
-  
+
+  /**
+   * Bind an event handler to the "resize" JavaScript event, or trigger that event on an element.
+   */
+  def resize(func:js.Function1[JQueryEventObject, Any]):JQuery = js.native
+  def resize(eventData:Any, handler:js.Function1[JQueryEventObject, Any]):JQuery = js.native
+  def resize(func:js.Function0[Any]):JQuery = js.native
+  def resize():JQuery = js.native
+
   /**
    * Get the current vertical position of the scroll bar for the first element in the set of
    * matched elements or set the vertical position of the scroll bar for every matched element.
