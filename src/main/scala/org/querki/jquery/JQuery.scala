@@ -79,7 +79,7 @@ trait JQuery extends js.Object {
   def children():JQuery = js.native
     
   /**
-   * Bind an event handler to the "click" JavaScript event.
+   * Bind an event handler to the "click" JavaScript event, or trigger that event on an element.
    * 
    * This is the simpler version, and usually what you want.
    */
@@ -87,6 +87,7 @@ trait JQuery extends js.Object {
   def click(func:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
   def click(func:js.Function1[JQueryEventObject, Any]):JQuery = js.native
   def click(func:js.Function0[Any]):JQuery = js.native
+  def click():JQuery = js.native
   
   /**
    * Create a deep copy of the set of matched elements.
