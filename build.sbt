@@ -9,7 +9,7 @@ name := "jQuery Facade"
 
 normalizedName := "jquery-facade"
 
-version := "0.4"
+version := "0.5"
 
 organization := "org.querki"
 
@@ -22,7 +22,7 @@ libraryDependencies ++= Seq(
   "org.scala-js" %%% "scalajs-dom" % "0.8.0"
 )
 
-jsDependencies += "org.webjars" % "jquery" % "2.1.3" / "jquery.min.js"
+jsDependencies += "org.webjars" % "jquery" % "2.1.3" / "jquery.js" minified "jquery.min.js"
 
 jsDependencies in Test += RuntimeDOM
 

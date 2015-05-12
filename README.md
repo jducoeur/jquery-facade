@@ -5,11 +5,12 @@ A strongly-typed Scala.js facade for jQuery
 
 To use jquery-facade, add this line to your libraryDependencies:
 ```
-"org.querki" %%% "jquery-facade" % "0.4"
+"org.querki" %%% "jquery-facade" % "0.5"
 ```
 The jquery-facade library will import the underlying jQuery code; you do not need to (and shouldn't) repeat it in
-your own build.sbt. This will be exposed as "jquery.min.js", and you can depend on that in jsDependencies. (See below
-for instructions how to use the un-minified code when you need to.)
+your own build.sbt. This will be exposed as `jquery.js`, and you can depend on that in jsDependencies. So long
+as you are using Scala.js 0.6.3 or better, this should automatically use the minified `jquery.min.js` in fullOptJS,
+and will compile that into the `-jsdeps.min.js` file.
 
 ### Using jquery-facade
 
@@ -86,61 +87,6 @@ in JQuery.
 
 Most of the time, you can ignore all of this -- I mention it mainly so you can find signatures or documentation
 when you're looking for it, and to understand the context for contributing PRs.
-
-### Using the un-minified version of jQuery
-
-(This section is only for programmers who want to roll up their sleeves and debug into jQuery itself, *and* you are
-using jsDependencies in your build.sbt to deal with dependency-order among multiple JavaScript libraries. If that's
-not you, just ignore this.)
-
-jquery-facade automatically pulls jquery.min.js into your build -- this is the "minified" version of jQuery, with
-its source code highly compressed. This is usually what you want, since it is much, much less for your users to
-download. But if you need to debug jQuery itself -- for example, when debugging a thorny problem with a jQuery
-gadget in the Chrome debugger -- you want the "raw", un-minified code.
-
-Currently, Scala.js doesn't have a well-defined concept that JavaScript libraries exist in both raw and minified
-form; that makes this a mild hassle, but you can make your project jQuery-debuggable by tweaking your build.sbt
-as follows. What the below steps do is include jquery.js *immediately* after jquery.min.js in your generated
--jsdeps.js file. (It is important to have them back-to-back, or the other JS libraries may get confused.)
-
-Say that your build.sbt file originally includes the following:
-```
-  jsDependencies += ProvidedJS / "bootstrap.min.js" dependsOn "jquery.min.js",
-  jsDependencies += ProvidedJS / "jquery.autosize.min.js" dependsOn "jquery.min.js",
-  jsDependencies += ProvidedJS / "jquery.raty.js" dependsOn "jquery.min.js",
-```
-That is, you have several JS libraries that need jQuery in order to work, so you are depending on "jquery.min.js".
-Now, you need to debug into jQuery.
-
-First, create an empty file named "jquery-shim.js". This shouldn't have anything more than comments; its only
-purpose is to provide a node in the dependency tree.
-
-Now, add these lines, above the other jsDependencies:
-```
-  // When we need to debug into jQuery itself, uncomment these two lines, and comment out the one below them:
-//  jsDependencies += "org.webjars" % "jquery" % "2.1.3" / "jquery.js" dependsOn "jquery.min.js",
-//  jsDependencies += ProvidedJS / "jquery-shim.js" dependsOn "jquery.js",
-  // Normal case: use the minified version of JQuery:
-  jsDependencies += ProvidedJS / "jquery-shim.js" dependsOn "jquery.min.js",
-```
-Then change the other lines to:
-```
-  jsDependencies += ProvidedJS / "bootstrap.min.js" dependsOn "jquery-shim.js",
-  jsDependencies += ProvidedJS / "jquery.autosize.min.js" dependsOn "jquery-shim.js",
-  jsDependencies += ProvidedJS / "jquery.raty.js" dependsOn "jquery-shim.js",
-```
-That is, you've now introduced "jquery-shim.js" as the replacement for "jquery.min.js" in the dependency
-tree. The other JS libraries depend on jquery-shim, and it depends on jquery.min.js.
-
-At this point, nothing has actually changed. When you *do* need to debug your code, switch the
-comments on the jquery-shim lines: uncomment the first two lines, and comment out the usual declaration.
-This tells sbt to include the raw "jquery.js", and that it depends on "jquery.min.js", so it will appear
-after it in the generated -jsdeps.js file. Due to the way JavaScript works, this means that the other
-libraries will use the full version instead of the minified one, so you can debug into it.
-
-Obviously, if you do this frequently, you'll want to define a better notion of "production" vs.
-"development" in your build.sbt, so that you can do this command-line instead of changing build.sbt
-itself. But for occasional debugging, this works.
 
 ### Why this library?
 
