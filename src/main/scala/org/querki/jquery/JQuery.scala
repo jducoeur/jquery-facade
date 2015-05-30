@@ -198,6 +198,9 @@ trait JQuery extends js.Object {
    */
   def get():js.Array[_] = js.native
   
+  @JSName("has")
+  def hasInternal(selector:js.Any):JQuery = js.native
+  
   /**
    * Determine whether any of the matched elements are assigned the given class.
    */
@@ -311,6 +314,7 @@ trait JQuery extends js.Object {
    */
   def off(events: String, selector: String, handler: js.ThisFunction1[Element, JQueryEventObject, Any]): JQuery = js.native
   def off(events: String, selector: String): JQuery = js.native
+  def off(events:String, handler: js.Function1[JQueryEventObject, Any]): JQuery = js.native
   def off(events: String): JQuery = js.native
   def off(): JQuery = js.native
   def off(eventsMap: js.Dictionary[js.ThisFunction1[Element, JQueryEventObject, Any]], selector: String): JQuery = js.native

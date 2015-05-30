@@ -59,6 +59,11 @@ class JQueryTyped(jq:JQuery) {
   def find(selector:Selector):JQuery = jq.findInternal(toJsAny(selector))
   
   /**
+   * Reduce the set of matched elements to those that have a descendant that matches the selector or DOM element.
+   */
+  def has(selector:Selector):JQuery = jq.hasInternal(toJsAny(selector))
+  
+  /**
    * Search for a given element from among the matched elements.
    */
   def index():Int = jq.indexInternal()
