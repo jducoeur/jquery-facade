@@ -22,11 +22,8 @@ import dom.Element
  * lacking many overloads -- I've added some of them, but many jQuery functions have a considerable number
  * of potential overloads.
  * 
- * Many parameters are polymorphic. We are currently dealing with the messy cases by defining a polymorphic
- * type in package.scala, using the "tor" type-union trick, and then defining a mid-level facade for that
- * method in JQueryTyped. Then we put a primitive "Internal" version of the method in here. As a rule, you
- * should not directly use any methods here named [something]Internal -- they should always have a more precisely-typed
- * version in JQueryTyped.
+ * Many parameters are polymorphic. We use \/ (type union) to define these. Note that there are several common unions
+ * such as Selector defined in package.scala.
  * 
  * NOTE: discussion on scalajs Gitter, 1/28/15, says that facades should *return* Any, but
  * *take* js.Any *if* the Javascript is going to process the value in any way. This is the guiding principle here.
@@ -34,8 +31,6 @@ import dom.Element
  * Also: when a facade function takes a property bag, if it is understood to be name/value pairs
  * in JS, declare it as js.Dictionary[T]. Often, we can constrain T; if not, just put js.Any, and it
  * is at least explicit that it is name/value pairs.
- * 
- * TODO: we should probably mark the XXXInternal methods as private [jquery]. See if that works.
  */
 trait JQuery extends js.Object {
   /**
@@ -44,21 +39,37 @@ trait JQuery extends js.Object {
   def addClass(classNames:String):JQuery = js.native
   def addClass(func:js.ThisFunction2[Element, Int, String, String]):JQuery = js.native
   
-  @JSName("after")
-  def afterInternal(content:js.Any*):JQuery = js.native
+  /**
+   * Insert content, specified by the parameter, after each element in the set of matched elements.
+   */
+  def after(content:ElementDesc*):JQuery = js.native
+  def after(func:js.ThisFunction0[Element, ElementDesc]):JQuery = js.native
+  def after(func:js.ThisFunction1[Element, Int, ElementDesc]):JQuery =  js.native
   
-  @JSName("append")
-  def appendInternal(content:js.Any*):JQuery = js.native
+  /**
+   * Insert content, specified by the parameter, to the end of each element in the set of matched elements.
+   */
+  def append(content:ElementDesc*):JQuery = js.native
+  def append(func:js.ThisFunction2[Element, Int, String, js.Any]):JQuery = js.native
 
-  @JSName("appendTo")
-  def appendToInternal(target:js.Any):JQuery = js.native
+  /**
+   * Insert every element in the set of matched elements to the end of the target.
+   */
+  def appendTo(target:ElementDesc):JQuery = js.native
   
-  @JSName("attr")
-  def attrInternal(attributeName:String):UndefOr[String] = js.native
-  @JSName("attr")
-  def attrInternal(attributes:js.Dictionary[String]):JQuery = js.native
-  @JSName("attr")
-  def attrInternal(attributeName:String, v:js.Any):JQuery = js.native
+  /**
+   * Get the value of an attribute for the first element in the set of matched elements.
+   * 
+   * Note that this returns UndefOr -- it is entirely legal for this to return undefined if
+   * the attribute is not present, and that causes things to crash if it is not UndefOr.
+   */
+  def attr(attributeName:String):UndefOr[String] = js.native
+  def attr(attributes:js.Dictionary[String]):JQuery = js.native
+  /**
+   * Set an attribute for the set of matched elements.
+   */
+  def attr(attributeName:String, v:AttrVal):JQuery = js.native
+  def attr(attributeName:String, func:js.ThisFunction2[Element, Int, String, AttrVal]):JQuery = js.native
   
   /**
    * Bind an event handler to the "change" JavaScript event, or trigger that event on an element.
@@ -168,11 +179,17 @@ trait JQuery extends js.Object {
    */
   def empty():JQuery = js.native
   
-  @JSName("filter")
-  def filterInternal(selectorOrFunc:js.Any):JQuery = js.native
-
-  @JSName("find")
-  def findInternal(selector:js.Any):JQuery = js.native
+  /**
+   * Reduce the set of matched elements to those that match the selector or pass the function's test.
+   */
+  def filter(selector:Selector):JQuery = js.native
+  def filter(func:js.ThisFunction0[Element, Boolean]):JQuery = js.native
+  def filter(func:js.ThisFunction1[Element, Int, Boolean]):JQuery = js.native
+  
+  /**
+   * Get the descendants of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.
+   */
+  def find(selector:Selector):JQuery = js.native
   
   /**
    * Reduce the set of matched elements to the first in the set.
@@ -198,8 +215,10 @@ trait JQuery extends js.Object {
    */
   def get():js.Array[_] = js.native
   
-  @JSName("has")
-  def hasInternal(selector:js.Any):JQuery = js.native
+  /**
+   * Reduce the set of matched elements to those that have a descendant that matches the selector or DOM element.
+   */
+  def has(selector:Selector):JQuery = js.native
   
   /**
    * Determine whether any of the matched elements are assigned the given class.
@@ -239,11 +258,12 @@ trait JQuery extends js.Object {
    */
   def html(t:String):JQuery = js.native
   def html(func:js.ThisFunction2[Element, Int, String, String]):JQuery = js.native
-
-  @JSName("index")
-  def indexInternal():Int = js.native
-  @JSName("index")
-  def indexInternal(selector:js.Any):Int = js.native
+  
+  /**
+   * Search for a given element from among the matched elements.
+   */
+  def index():Int = js.native
+  def index(selector:ElementDesc):Int = js.native
 
   /**
    * Get the current computed inner height (including padding but not border) for the first element
@@ -256,16 +276,22 @@ trait JQuery extends js.Object {
    * in the set of matched elements.
    */
   def innerWidth():Double = js.native
-
-  @JSName("insertBefore")
-  def insertBeforeInternal(selector:js.Any):JQuery = js.native
+  
+  /**
+   * Insert every element in the set of matched elements before the target.
+   */
+  def insertBefore(target:ElementDesc):JQuery = js.native
   
   /**
    * Check the current matched set of elements against a selector, element,
    * or jQuery object and return true if at least one of these elements matches the given arguments.
    */
-  @JSName("is")
-  def isInternal(selector:js.Any):Boolean = js.native
+  def is(selector:Selector):Boolean = js.native
+  /**
+   * Note that this overload doesn't precisely match the jQuery documentation; we
+   * elide the redundant Element param, since you have Element as the this parameter.
+   */
+  def is(func:js.ThisFunction1[Element, Int, Boolean]):Boolean = js.native
   
   /**
    * Bind an event handler to the "keydown" JavaScript event, or trigger that event on an element.
@@ -380,8 +406,8 @@ trait JQuery extends js.Object {
   /**
    * Insert content, specified by the parameters, to the beginning of each element in the set of matched elements.
    */
-  @JSName("prepend")
-  def prependInternal(contents:js.Any*):JQuery = js.native
+  def prepend(contents:ElementDesc*):JQuery = js.native
+  def prepend(func:js.ThisFunction2[Element, Int, String, Selector]):JQuery = js.native
   
   /**
    * Get the value of a property for the first element in the set of matched elements.
@@ -407,8 +433,11 @@ trait JQuery extends js.Object {
   def removeClass(classNames:String):JQuery = js.native
   def removeClass(func:js.ThisFunction2[Element, Int, String, String]):JQuery = js.native
   
-  @JSName("replaceWith")
-  def replaceWithInternal(content:js.Any):JQuery = js.native
+  /**
+   * Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed.
+   */
+  def replaceWith(content:ElementDesc):JQuery = js.native
+  def replaceWith(func:js.ThisFunction0[Element, ElementDesc]):JQuery = js.native
 
   /**
    * Bind an event handler to the "resize" JavaScript event, or trigger that event on an element.
