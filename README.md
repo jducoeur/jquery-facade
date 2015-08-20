@@ -5,7 +5,7 @@ A strongly-typed Scala.js facade for jQuery
 
 To use jquery-facade, add this line to your libraryDependencies:
 ```
-"org.querki" %%% "jquery-facade" % "0.7"
+"org.querki" %%% "jquery-facade" % "0.8"
 ```
 The jquery-facade library will import the underlying jQuery code; you do not need to (and shouldn't) repeat it in
 your own build.sbt. This will be exposed as `jquery.js`, and you can depend on that in jsDependencies. So long
@@ -111,6 +111,8 @@ Pull Requests are welcome, but please observe the style guidelines of this libra
 * When a facade function takes a property bag, if it is understood to be name/value pairs in JS, declare it as js.Dictionary[T]. Often, we can constrain T; if not, just put js.Any, and it is at least explicit that it is name/value pairs.
  
 ### What's New
+
+* **0.8** -- Fleshed out JQueryEventObject facade with more of the fields. Updated to jQuery 2.1.4.
 
 * **0.7** -- introduced the new `\/` type-union mechanism, which is currently in testing to go into the main Scala.js release. This simplifies the jquery-facade considerably, and allows us to get rid of JQueryTyped. Besides resulting in clearer code, this new mechanism should be much more efficient than the old approach, since it focuses on proving the conversions to the compiler without introducing all those extra runtime objects.
 
