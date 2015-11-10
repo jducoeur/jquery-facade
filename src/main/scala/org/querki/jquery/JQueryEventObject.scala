@@ -9,6 +9,7 @@ import org.querki.jsext._
 /**
  * The facade over an event from JQuery.
  */
+@js.native
 trait JQueryEventObject extends Event {
   /**
    * Is the alt key pressed? Only defined on certain events.

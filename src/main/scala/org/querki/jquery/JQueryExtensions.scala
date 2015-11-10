@@ -20,7 +20,7 @@ class JQueryExtensions(jq:JQuery) {
    * You should only call this if you *know* with confidence that this data field is set,
    * and that the value is String; it will crash otherwise.
    */
-  def dataString(name:String) = jq.data(name).asInstanceOf[String]
+  def dataString(name:String) = jq.data(name).get.asInstanceOf[String]
     
   /**
    * Wrap $.map in something more idiomatic and convenient for Scala

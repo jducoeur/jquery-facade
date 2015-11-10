@@ -3,6 +3,7 @@ package org.querki.jquery
 import scala.scalajs.js
 import org.querki.jsext._
 
+@js.native
 trait JQueryAjaxSettings extends js.Object {
   // TODO: flesh this out! This is behind the Builder, because you *mostly* care about writing this structure.
   // Really, we want a way for the Builder declaration to also create the reader, if we can come up with some

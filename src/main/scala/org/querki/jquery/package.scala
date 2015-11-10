@@ -1,7 +1,7 @@
 package org.querki
 
 import scala.scalajs.js
-import js.\/
+import js.|
 import js.JSConverters._
 import org.scalajs.dom
 import dom.Element
@@ -30,18 +30,18 @@ package object jquery {
    * how it treats the term "Selector" -- sometimes it just uses the term to mean Strings,
    * sometimes it means all of the possible types. So use this with some care.
    */
-  type Selector = String \/ Element \/ js.Array[Element]
+  type Selector = String | Element | js.Array[Element]
   
   /**
    * This union type gets used for several functions that really allow anything that can describe an
    * Element. This is similar to Selector, but allows you to pass in a JQuery as well.
    */
-  type ElementDesc = String \/ Element \/ JQuery \/ js.Array[Element]
+  type ElementDesc = String | Element | JQuery | js.Array[Element]
   
   /**
    * This union type represents valid types that you can set an attribute to.
    */
-  type AttrVal = String \/ Int \/ Boolean
+  type AttrVal = String | Int | Boolean
   
   /**
    * Convenience conversion, so that you can use a Scala Seq[Element] where the API expects a js.Array[Element].

@@ -32,6 +32,7 @@ import dom.Element
  * in JS, declare it as js.Dictionary[T]. Often, we can constrain T; if not, just put js.Any, and it
  * is at least explicit that it is name/value pairs.
  */
+@js.native
 trait JQuery extends js.Object {
   /**
    * Adds the specified class(es) to each of the set of matched elements.
@@ -129,9 +130,9 @@ trait JQuery extends js.Object {
   def data(obj: js.Dictionary[js.Any]): JQuery = js.native
   /**
    * Return the value at the named data store for the first element in the jQuery collection, 
-   * as set by data(name, value) or by an HTML5 data-* attribute.
+   * as set by data(name, value) or by an HTML5 data-* attribute. Undefined if that key is not set.
    */
-  def data(key: String): js.Any = js.native
+  def data(key: String): UndefOr[js.Any] = js.native
   /**
    * Calling .data() with no parameters retrieves all of the values as a JavaScript object. 
    * This object can be safely cached in a variable as long as a new object is not set with .data(obj). 
@@ -552,6 +553,7 @@ trait JQuery extends js.Object {
  *  cases. Code should not assume it is an integer. Also, dimensions may be incorrect when the page
  *  is zoomed by the user; browsers do not expose an API to detect this condition."
  */
+@js.native
 trait JQueryPosition extends js.Object {
   def left:Double = js.native
   def top:Double = js.native

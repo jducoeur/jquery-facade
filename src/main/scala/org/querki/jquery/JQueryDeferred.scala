@@ -2,6 +2,7 @@ package org.querki.jquery
 
 import scala.scalajs.js
 
+@js.native
 trait JQueryPromise extends js.Object {
   /**
    * Add handlers to be called when the Deferred object is either resolved or rejected.
@@ -19,6 +20,7 @@ trait JQueryPromise extends js.Object {
   // TODO: add `then`(). Don't bother with pipe() -- it is deprecated.
 }
 
+@js.native
 trait JQueryDeferred extends JQueryPromise {
   /**
    * Call the progressCallbacks on a Deferred object with the given args.
