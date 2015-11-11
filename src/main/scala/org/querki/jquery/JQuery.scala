@@ -355,11 +355,18 @@ trait JQuery extends js.Object {
   
   /**
    * Attach an event handler function for one or more events to the selected elements.
+   * 
+   * Note that this contains overloads for up to 2 "extra" parameters to the handler, but the number is
+   * potentially unlimited. If we ever care about more, we could add them.
    */
   def on(events:String, selector: String, data: Any, handler: js.ThisFunction1[Element, JQueryEventObject, Any]): JQuery = js.native
-  def on(events:String, handler: js.ThisFunction1[Element, JQueryEventObject, Any]): JQuery = js.native
   def on(events:String, handler: js.ThisFunction0[Element, Any]):JQuery = js.native
+  def on(events:String, handler: js.ThisFunction1[Element, JQueryEventObject, Any]): JQuery = js.native
+  def on(events:String, handler: js.ThisFunction2[Element, JQueryEventObject, Any, Any]): JQuery = js.native
+  def on(events:String, handler: js.ThisFunction3[Element, JQueryEventObject, Any, Any, Any]): JQuery = js.native
   def on(events:String, handler: js.Function1[JQueryEventObject, Any]): JQuery = js.native
+  def on(events:String, handler: js.Function2[JQueryEventObject, Any, Any]): JQuery = js.native
+  def on(events:String, handler: js.Function3[JQueryEventObject, Any, Any, Any]): JQuery = js.native
   /**
    * Attach an event handler function for one or more events to the selected elements.
    * 
