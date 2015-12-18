@@ -362,7 +362,9 @@ trait JQuery extends js.Object {
    * 
    * IMPORTANT: this first signature allows you to specify a sub-selector, and some data to pass. There
    * data parameter is *not* optional -- you must pass something in order for the compiler to pick it up!
-   * (At least, put in js.undefined there.)
+   * (At least, put in js.undefined there.) For example, something like:
+   * 
+   * $("body").on("click", ".element", js.undefined, { (elem:Element, evt:JQueryEventObject) => {...} )
    * 
    * We can't write jQuery's (String, String, ThingFunction1) version of the signature here, because it conflicts with the
    * (String, String, Any) version further down, which does something very different. (jQuery is 
