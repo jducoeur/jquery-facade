@@ -358,6 +358,18 @@ trait JQuery extends js.Object {
    * 
    * Note that this contains overloads for up to 2 "extra" parameters to the handler, but the number is
    * potentially unlimited. If we ever care about more, we could add them.
+   * 
+   * 
+   * IMPORTANT: this first signature allows you to specify a sub-selector, and some data to pass. There
+   * data parameter is *not* optional -- you must pass something in order for the compiler to pick it up!
+   * (At least, put in js.undefined there.)
+   * 
+   * We can't write jQuery's (String, String, ThingFunction1) version of the signature here, because it conflicts with the
+   * (String, String, Any) version further down, which does something very different. (jQuery is 
+   * sometimes too clever for its own good.)
+   * 
+   * So remember to pass something for the data parameter, in order to get the compiler to do the right thing. 
+   * If you don't, your function *will* match the (String, String, Any) version of the signature, but it won't work correctly.
    */
   def on(events:String, selector: String, data: Any, handler: js.ThisFunction1[Element, JQueryEventObject, Any]): JQuery = js.native
   def on(events:String, handler: js.ThisFunction0[Element, Any]):JQuery = js.native
