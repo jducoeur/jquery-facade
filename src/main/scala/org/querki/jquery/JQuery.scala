@@ -434,7 +434,7 @@ trait JQuery extends js.Object {
   /**
    * Get the value of a property for the first element in the set of matched elements.
    */
-  def prop(propertyName:String):Any = js.native
+  def prop(propertyName:String):UndefOr[Any] = js.native
   /**
    * Set one or more properties for the set of matched elements.
    */
