@@ -5,7 +5,7 @@ A strongly-typed Scala.js facade for jQuery
 
 To use jquery-facade, add this line to your libraryDependencies:
 ```
-"org.querki" %%% "jquery-facade" % "0.10"
+"org.querki" %%% "jquery-facade" % "0.11"
 ```
 The jquery-facade library will import the underlying jQuery code; you do not need to (and shouldn't) repeat it in
 your own build.sbt. This will be exposed as `jquery.js`, and you can depend on that in jsDependencies. So long
