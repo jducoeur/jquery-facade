@@ -2,6 +2,7 @@ package org.querki.jquery
 
 import scala.scalajs.js
 import js.UndefOr
+import js.|
 import js.annotation.JSName
 
 import org.scalajs.dom
@@ -319,6 +320,13 @@ trait JQuery extends js.Object {
    * The number of elements in the jQuery object.
    */
   def length:Int = js.native
+  
+  /**
+   * Load data from the server and place the returned HTML into the matched element.
+   */
+  def load(url:String):JQuery = js.native
+  def load(url:String, data:String | js.Object):JQuery = js.native
+  def load(url:String, data:String | js.Object, complete:js.ThisFunction3[Element, String, String, JQueryXHR, Any]):JQuery = js.native
   
   /**
    * Pass each element in the current matched set through a function, producing a new jQuery object
