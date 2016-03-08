@@ -1,23 +1,44 @@
 package org.querki.jquery
 
 import scala.scalajs.js
+import js.{UndefOr, |}
 import org.querki.jsext._
 
 @js.native
 trait JQueryAjaxSettings extends js.Object {
-  // TODO: flesh this out! This is behind the Builder, because you *mostly* care about writing this structure.
-  // Really, we want a way for the Builder declaration to also create the reader, if we can come up with some
-  // macro magic to make that work.
-  
-  /**
-   * Type: PlainObject or String or Array
-   * 
-   * Data to be sent to the server. It is converted to a query string, if not already a string. It's appended 
-   * to the url for GET-requests. See processData option to prevent this automatic processing. Object must be 
-   * Key/Value pairs. If value is an Array, jQuery serializes multiple values with same key based on the value 
-   * of the traditional setting (described below).
-   */
-  def data:js.Any = js.native
+  def accepts:UndefOr[js.Object] = js.native
+  def async:UndefOr[Boolean] = js.native
+  def beforeSend:UndefOr[js.Function1[JQueryXHR, js.Object]] = js.native
+  def cache:UndefOr[Boolean] = js.native
+  def complete:UndefOr[js.Function1[JQueryXHR, String]] = js.native
+  def contents:UndefOr[js.Dictionary[js.RegExp]] = js.native
+  def contentType:UndefOr[Boolean | String] = js.native
+  def context:UndefOr[js.Object] = js.native
+  def converters:UndefOr[js.Dictionary[js.Function1[String, String]]] = js.native
+  def crossDomain:UndefOr[Boolean] = js.native
+  def data:UndefOr[js.Dictionary[js.Any] | String] = js.native
+  def dataFilter:UndefOr[js.Function2[String, String, Any]] = js.native
+  def dataType:UndefOr[String] = js.native
+  def error:UndefOr[js.Function3[JQueryXHR, String, String, Any]] = js.native
+  def global:UndefOr[Boolean] = js.native
+  def headers:UndefOr[js.Dictionary[String]] = js.native
+  def ifModified:UndefOr[Boolean] = js.native
+  def isLocal:UndefOr[Boolean] = js.native
+  def jsonp:UndefOr[String] = js.native
+  def jsonpCallback:UndefOr[String | js.Function0[String]] = js.native
+  def method:UndefOr[String] = js.native
+  def mimeType:UndefOr[String] = js.native
+  def password:UndefOr[String] = js.native
+  def processData:UndefOr[Boolean] = js.native
+  def scriptCharset:UndefOr[String] = js.native
+  def statusCode:UndefOr[js.Object] = js.native
+  def success:UndefOr[js.Function3[js.Any, String, JQueryXHR, Any] | js.Array[js.Function3[js.Any, String, JQueryXHR, Any]]] = js.native
+  def timeout:UndefOr[Int] = js.native
+  def traditional:UndefOr[Boolean] = js.native
+  def `type`:UndefOr[String] = js.native
+  def url:UndefOr[String] = js.native
+  def username:UndefOr[String] = js.native
+  def xhrFields:UndefOr[js.Dictionary[js.Any]] = js.native
 }
 
 object JQueryAjaxSettings extends JQueryAjaxSettingsBuilder(noOpts)
