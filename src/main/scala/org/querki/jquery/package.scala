@@ -43,6 +43,8 @@ package object jquery {
    */
   type AttrVal = String | Int | Boolean
   
+  type Number = Double | Int
+  
   /**
    * Convenience conversion, so that you can use a Scala Seq[Element] where the API expects a js.Array[Element].
    */
