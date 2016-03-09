@@ -6,39 +6,43 @@ import org.querki.jsext._
 
 @js.native
 trait JQueryAjaxSettings extends js.Object {
-  def accepts:UndefOr[js.Object] = js.native
-  def async:UndefOr[Boolean] = js.native
-  def beforeSend:UndefOr[js.Function1[JQueryXHR, js.Object]] = js.native
-  def cache:UndefOr[Boolean] = js.native
-  def complete:UndefOr[js.Function1[JQueryXHR, String]] = js.native
-  def contents:UndefOr[js.Dictionary[js.RegExp]] = js.native
-  def contentType:UndefOr[Boolean | String] = js.native
-  def context:UndefOr[js.Object] = js.native
-  def converters:UndefOr[js.Dictionary[js.Function1[String, String]]] = js.native
-  def crossDomain:UndefOr[Boolean] = js.native
-  def data:UndefOr[js.Dictionary[js.Any] | String] = js.native
-  def dataFilter:UndefOr[js.Function2[String, String, Any]] = js.native
-  def dataType:UndefOr[String] = js.native
-  def error:UndefOr[js.Function3[JQueryXHR, String, String, Any]] = js.native
-  def global:UndefOr[Boolean] = js.native
-  def headers:UndefOr[js.Dictionary[String]] = js.native
-  def ifModified:UndefOr[Boolean] = js.native
-  def isLocal:UndefOr[Boolean] = js.native
-  def jsonp:UndefOr[String] = js.native
-  def jsonpCallback:UndefOr[String | js.Function0[String]] = js.native
-  def method:UndefOr[String] = js.native
-  def mimeType:UndefOr[String] = js.native
-  def password:UndefOr[String] = js.native
-  def processData:UndefOr[Boolean] = js.native
-  def scriptCharset:UndefOr[String] = js.native
-  def statusCode:UndefOr[js.Object] = js.native
-  def success:UndefOr[js.Function3[js.Any, String, JQueryXHR, Any] | js.Array[js.Function3[js.Any, String, JQueryXHR, Any]]] = js.native
-  def timeout:UndefOr[Int] = js.native
-  def traditional:UndefOr[Boolean] = js.native
-  def `type`:UndefOr[String] = js.native
-  def url:UndefOr[String] = js.native
-  def username:UndefOr[String] = js.native
-  def xhrFields:UndefOr[js.Dictionary[js.Any]] = js.native
+  // jquery-facade leans strongly towards declaring fields like this as "def", to discourage
+  // mutable code. But ajaxPrefilter() expects you to mutate the JQueryAjaxSettings in-place,
+  // so we have to declare them as vars. If you come across similar situations for other
+  // structures, please raise them as Issues in the repo.
+  var accepts:UndefOr[js.Object] = js.native
+  var async:UndefOr[Boolean] = js.native
+  var beforeSend:UndefOr[js.Function1[JQueryXHR, js.Object]] = js.native
+  var cache:UndefOr[Boolean] = js.native
+  var complete:UndefOr[js.Function1[JQueryXHR, String]] = js.native
+  var contents:UndefOr[js.Dictionary[js.RegExp]] = js.native
+  var contentType:UndefOr[Boolean | String] = js.native
+  var context:UndefOr[js.Object] = js.native
+  var converters:UndefOr[js.Dictionary[js.Function1[String, String]]] = js.native
+  var crossDomain:UndefOr[Boolean] = js.native
+  var data:UndefOr[js.Dictionary[js.Any] | String] = js.native
+  var dataFilter:UndefOr[js.Function2[String, String, Any]] = js.native
+  var dataType:UndefOr[String] = js.native
+  var error:UndefOr[js.Function3[JQueryXHR, String, String, Any]] = js.native
+  var global:UndefOr[Boolean] = js.native
+  var headers:UndefOr[js.Dictionary[String]] = js.native
+  var ifModified:UndefOr[Boolean] = js.native
+  var isLocal:UndefOr[Boolean] = js.native
+  var jsonp:UndefOr[String] = js.native
+  var jsonpCallback:UndefOr[String | js.Function0[String]] = js.native
+  var method:UndefOr[String] = js.native
+  var mimeType:UndefOr[String] = js.native
+  var password:UndefOr[String] = js.native
+  var processData:UndefOr[Boolean] = js.native
+  var scriptCharset:UndefOr[String] = js.native
+  var statusCode:UndefOr[js.Object] = js.native
+  var success:UndefOr[js.Function3[js.Any, String, JQueryXHR, Any] | js.Array[js.Function3[js.Any, String, JQueryXHR, Any]]] = js.native
+  var timeout:UndefOr[Int] = js.native
+  var traditional:UndefOr[Boolean] = js.native
+  var `type`:UndefOr[String] = js.native
+  var url:UndefOr[String] = js.native
+  var username:UndefOr[String] = js.native
+  var xhrFields:UndefOr[js.Dictionary[js.Any]] = js.native
 }
 
 object JQueryAjaxSettings extends JQueryAjaxSettingsBuilder(noOpts)

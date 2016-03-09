@@ -41,6 +41,9 @@ import dom.Element
  * Also: when a facade function takes a property bag, if it is understood to be name/value pairs
  * in JS, declare it as js.Dictionary[T]. Often, we can constrain T; if not, just put js.Any, and it
  * is at least explicit that it is name/value pairs.
+ * 
+ * Long-deprecated functions are, by and large, simply omitted. Please see the jQuery documentation to see
+ * what to use instead.
  */
 @js.native
 trait JQuery extends js.Object {
