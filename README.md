@@ -1,16 +1,17 @@
 # jquery-facade
 A strongly-typed Scala.js facade for jQuery
 
-### Installing the Library
+### Using the Library
 
 To use jquery-facade, add this line to your libraryDependencies:
 ```
-"org.querki" %%% "jquery-facade" % "0.11"
+"org.querki" %%% "jquery-facade" % "1.0-RC1"
 ```
-The jquery-facade library will import the underlying jQuery code; you do not need to (and shouldn't) repeat it in
-your own build.sbt. This will be exposed as `jquery.js`, and you can depend on that in jsDependencies. So long
-as you are using Scala.js 0.6.3 or better, this should automatically use the minified `jquery.min.js` in fullOptJS,
-and will compile that into the `-jsdeps.min.js` file.
+**Important:** jquery-facade no longer automatically includes the underlying JavaScript jQuery library, because doing so was causing versioning problems for applications. So you will also need to include the jQuery in your jsDependencies. How you do so depends on how you want to include it. For example, in order to fetch the most recent version (as of this writing, 2.2.1) from the online WebJars collection, add the following line:
+```
+jsDependencies += "org.webjars" % "jquery" % "2.2.1" / "jquery.js" minified "jquery.min.js"
+```
+Note that jquery-facade and the underlying jQuery library do *not* need to be exactly in sync, but I recommend using a reasonably recent version of the library.
 
 ### Using jquery-facade
 
@@ -48,6 +49,11 @@ to pass any of several types in to this parameter. The type unions currently in 
 For ease of use, there are implicit defs for Selector and ElementDesc so that you can pass a Seq[Element] instead of a 
 js.Array[Element], and it will be auto-converted.
 
+As of this writing, jquery-facade is roughly complete: it includes at least most known entry points in jQuery.
+That said, the majority of those entry points have not yet been tested from Scala, and I haven't gone through
+the library with a fine-toothed comb looking for omissions. If you come across bugs or missing bits (both quite
+plausible), please enter an Issue on GitHub, and pull requests for fixes are greatly welcomed.
+
 #### Extensions
 
 There is also a JQueryExtensions trait, as another implicit conversion from JQuery. This contains methods
@@ -67,7 +73,7 @@ strictly necessary for Scala.js development, complex projects often find that th
 
 The original facade for jQuery -- scala-js-jquery -- was one of the first facades promulgated as Scala.js began
 to be ready for real use. It is more or less complete, but it was written fairly quickly, and the result is that
-it is pretty loosely typed. That is, it functions, but it doesn't provide a lot of type support for the compiler
+it is very loosely typed. That is, it functions, but it doesn't provide a lot of type support for the compiler
 and IDE. This is mostly because the type-union problem was mostly dealt with by simply defining these parameters
 as js.Any. It is also slightly inaccurate in a few details -- in particular, some facade signatures return T where
 they should return UndefOr[T], which would cause surprising crashes in Scala.js code when the function returned
@@ -80,11 +86,9 @@ library instead, which folks could opt into.
 
 ### Caveats
 
-As of this writing, this facade is rather incomplete.  jQuery is enormous and complex, and the philosophy behind this
-facade has been that doing it right is more important than shoving it all out the door quickly. There are a bunch
-of functions entirely missing, and a substantial number of overloaded signatures that need to be filled in. If you
-need a few specific functions, drop me a line and I'll see about adding them. (And Pull Requests are welcomed.) By
-and large, the most common functions are mostly implemented.
+As of this writing, this facade is roughly complete, but much of it is in a first-draft state. The majority of the entry
+point were blown in quickly, based on the jQuery documentation. So it is likely that there are some bugs here and there.
+Please report any that you come across.
 
 ### Converting from scala-js-jquery
 
@@ -93,24 +97,44 @@ base of my own to convert), but some code change is necessary:
 
 * At the least, you need to change the libraryDependency, and change the imports in your .scala files.
 * If you weren't already aliasing `jQuery` to `$`, you'll want to change your calls.
-* Some methods are not implemented here yet, so you may want to check the JQuery and JQueryTyped traits for what you need before converting.
-* A few methods have subtly different signatures. Most importantly, attr() returns UndefOr[String] here, where it returns String in scala-js-jquery. You will need to add a `.get` to such a call, or (better) treat it like an Option and use something like `.map`.
+* A number of methods have subtly different signatures. Most importantly, attr() returns UndefOr[String] here, where it returns String in scala-js-jquery. You will need to add a `.get` to such a call, or (better) treat it like an Option and use something like `.map`.
+* The larger "options" objects that you sometimes need to create, such as JQueryAjaxSettings and JQueryAnimationSettings, are written in JSOptionBuilder style. This means that, to create one of these objects, you use a series of chained function calls, like this:
+```
+$(myElement).fadeIn(JQueryAnimationSettings.
+  duration(1000).
+  queue("myAnimationQueue").
+  complete({elem => println("I'm done fading in!")})
+)
+```
+* Smaller objects, that require you to fill in all fields, use @ScalaJSDefined style instead. For example, to set an offset:
+```
+$(myElement).offset(new JQueryPosition {
+  val left = 400
+  val top = 50
+})
+```
 
 ### Contributing to jquery-facade
 
 Pull Requests are welcome, but please observe the style guidelines of this library:
 
 * When the underlying jQuery call takes a parameter matching one of the type unions (especially Selector), please use that union type. However, please note that the jQuery API documentation is very inconsistent: when they say a parameter takes "Selector", they sometimes really mean a Selector -- String or Element or js.Array[Element] -- but sometimes just mean String. And sometimes they *don't* say that it takes Selector, but instead spell out the possible types and leave you to infer that they mean Selector. Read the API docs carefully, and try to interpret them correctly.
-* JQuery is in alphabetical order, to make it easier to find things; please keep it that way.
+* JQuery and JQueryStatic are in alphabetical order, to make it easier to find things; please keep it that way.
 * Please include a brief comment with each entry point, to remind folks of what it does. I usually use the summary line from the actual jQuery API.
 * You do *not* have to include every possible overload for a function, but thoroughness is appreciated.
 * Accuracy is paramount: all overloads should be strictly typed to match the jQuery documentation as best possible.
-* If a parameter takes "anything", try to figure out whether jQuery is processing that parameter in any way. If it is, the parameter should be js.Any; if not (if it is completely opaque), then it should be scala.Any.
+* If a parameter takes "anything", try to figure out whether jQuery is processing that parameter in any way. If it is, the parameter should be js.Any; if not (if it is completely opaque), then it should be scala.Any. For example, a "data" parameter, that jQuery is simply passing along to callbacks, should usually be scala.Any.
 * If a callback parameter ignores its return value, the return type should be scala.Any.
 * Be careful about the return value from a method. Most JQuery methods return JQuery, but not all.
-* When a facade function takes a property bag, if it is understood to be name/value pairs in JS, declare it as js.Dictionary[T]. Often, we can constrain T; if not, just put js.Any, and it is at least explicit that it is name/value pairs.
- 
+* When a facade function takes a property bag, if it is understood to be name/value pairs in JS, declare it as js.Dictionary[T]. Often, we can constrain T; if not, just put js.Dictionary[js.Any], and it is at least explicit that it is name/value pairs.
+
 ### What's New
+
+* **1.0-RC1** -- Decided that I was tired of the scalajs-jquery / jquery-facade split, so blew in the rest of the missing entry points. At this point, I believe that jquery-facade is more or less complete, but bugs are fairly likely: I've roughly tripled the size of the library, and none of the new stuff is tested yet. Please test, and report any problems you find.
+
+* **0.11** -- Added `load()`, and tweaked `prop()`.
+
+* **0.10** -- Added more overloads of `on()`.
 
 * **0.8** -- Fleshed out JQueryEventObject facade with more of the fields. Updated to jQuery 2.1.4.
 
