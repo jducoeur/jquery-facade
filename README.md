@@ -95,7 +95,7 @@ Please report any that you come across.
 By and large, I tried to avoid *gratuitous* incompatibilities between the libraries (after all, I had a large code
 base of my own to convert), but some code change is necessary:
 
-* At the least, you need to change the libraryDependency, and change the imports in your .scala files.
+* At the least, you need to change the libraryDependency, and change the imports in your .scala files to `import org.querki.jquery._`.
 * If you weren't already aliasing `jQuery` to `$`, you'll want to change your calls.
 * A number of methods have subtly different signatures. Most importantly, attr() returns UndefOr[String] here, where it returns String in scala-js-jquery. You will need to add a `.get` to such a call, or (better) treat it like an Option and use something like `.map`.
 * The larger "options" objects that you sometimes need to create, such as JQueryAjaxSettings and JQueryAnimationSettings, are written in JSOptionBuilder style. This means that, to create one of these objects, you use a series of chained function calls, like this:
