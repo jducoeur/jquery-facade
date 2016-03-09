@@ -313,7 +313,7 @@ object JQueryStatic extends js.Object {
   def trim(str:String):String = js.native
   
   /**
-   * Determine the internal JavaScript [[Class]] of an object.
+   * Determine the internal JavaScript Class of an object.
    * 
    * TODO: we ought to have a strongly-typed way to test the results from this, in an extension method.
    */
