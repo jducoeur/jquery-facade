@@ -57,7 +57,7 @@ trait JQuery extends js.Object {
   /**
    * Add the previous set of elements on the stack to the current set, optionally filtered by a selector.
    */
-  def addBack(selector:UndefOr[String] = js.undefined):JQuery = js.native
+  def addBack(selector:String = ???):JQuery = js.native
   
   /**
    * Adds the specified class(es) to each of the set of matched elements.
@@ -108,8 +108,8 @@ trait JQuery extends js.Object {
   def animate(
     properties:js.Dictionary[js.Any], 
     duration:Number | String, 
-    easing:UndefOr[String] = js.undefined, 
-    complete:UndefOr[js.ThisFunction0[Element, Any]] = js.undefined):JQuery = js.native
+    easing:String = ???, 
+    complete:js.ThisFunction0[Element, Any] = ???):JQuery = js.native
   def animate(properties:js.Dictionary[js.Any], options:JQueryAnimationSettings):JQuery = js.native
     
   /**
@@ -161,8 +161,8 @@ trait JQuery extends js.Object {
    * Bind an event handler to the "blur" JavaScript event, or trigger that event on an element.
    */
   def blur():JQuery = js.native
-  def blur(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def blur(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  def blur(handler:EventHandler):JQuery = js.native
+  def blur(eventData:Any, handler:EventHandler):JQuery = js.native
   
   /**
    * Bind an event handler to the "change" JavaScript event, or trigger that event on an element.
@@ -170,33 +170,27 @@ trait JQuery extends js.Object {
    * NOTE: the jQuery documentation is very fuzzy on this point, but implies in an example that "this" gets
    * set appropriately.
    */
-  def change(handler:js.ThisFunction0[Element, Any]):JQuery = js.native
-  def change(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def change(handler:js.Function1[JQueryEventObject, Any]):JQuery = js.native
-  def change(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
   def change():JQuery = js.native
+  def change(handler:EventHandler):JQuery = js.native
+  def change(eventData:Any, handler:EventHandler):JQuery = js.native
   
   /**
    * Get the children of each element in the set of matched elements, optionally filtered by a selector.
    */
-  def children(selector:String):JQuery = js.native
-  def children():JQuery = js.native
+  def children(selector:String = ???):JQuery = js.native
   
   /**
    * Remove from the queue all items that have not yet been run.
    */
-  def clearQueue(queueName:UndefOr[String] = js.undefined):JQuery = js.native
+  def clearQueue(queueName:String = ???):JQuery = js.native
     
   /**
    * Bind an event handler to the "click" JavaScript event, or trigger that event on an element.
    * 
    * This is the simpler version, and usually what you want.
    */
-  def click(func:js.ThisFunction0[Element, Any]):JQuery = js.native
-  def click(func:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def click(func:js.Function1[JQueryEventObject, Any]):JQuery = js.native
-  def click(func:js.Function0[Any]):JQuery = js.native
   def click():JQuery = js.native
+  def click(handler:EventHandler):JQuery = js.native
   
   /**
    * Create a deep copy of the set of matched elements.
@@ -225,8 +219,7 @@ trait JQuery extends js.Object {
    */
   def css(propertyName:String):String = js.native
   def css(propertyNames:Array[String]):js.Dictionary[String] = js.native
-  def css(propertyName:String, value:String):JQuery = js.native
-  def css(propertyName:String, value:Int):JQuery = js.native
+  def css(propertyName:String, value:String | Int):JQuery = js.native
   def css(properties:js.Dictionary[js.Any]):JQuery = js.native
   
   /**
@@ -252,26 +245,22 @@ trait JQuery extends js.Object {
   
   /**
    * Bind an event handler to the "dblclick" JavaScript event.
-   *
-   * This is the simpler version, and usually what you want.
    */
-  def dblclick(func:js.ThisFunction0[Element, Any]):JQuery = js.native
-  def dblclick(func:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def dblclick(func:js.Function1[JQueryEventObject, Any]):JQuery = js.native
-  def dblclick(func:js.Function0[Any]):JQuery = js.native
+  def dblclick():JQuery = js.native
+  def dblclick(handler:EventHandler):JQuery = js.native
+  def dblclick(eventData:Any, handler:EventHandler):JQuery = js.native
 
   /**
    * Set a timer to delay execution of subsequent items in the queue.
    */
-  def delay(duration:Int):JQuery = js.native
-  def delay(duration:Int, queueName:String):JQuery = js.native
+  def delay(duration:Int, queueName:String = ???):JQuery = js.native
   
   // NOTE: delegate() has been superceded by on().
   
   /**
    * Execute the next function on the queue for the matched elements.
    */
-  def dequeue(queueName:UndefOr[String] = js.undefined):JQuery = js.native
+  def dequeue(queueName:String = ???):JQuery = js.native
   
   /**
    * Remove the set of matched elements from the DOM.
@@ -288,8 +277,7 @@ trait JQuery extends js.Object {
    * You can stop the loop from within the callback function by returning false. Otherwise, the return
    * value is irrelevant.
    */
-  def each(func:js.ThisFunction0[Element, Any]):JQuery = js.native
-  def each(func:js.ThisFunction1[Element, Int, Any]):JQuery = js.native
+  def each(func:js.ThisFunction0[Element, Any] | js.ThisFunction1[Element, Int, Any]):JQuery = js.native
   
   /**
    * Remove all child nodes of the set of matched elements from the DOM.
@@ -310,26 +298,24 @@ trait JQuery extends js.Object {
    * Display the matched elements by fading them to opaque.
    */
   def fadeIn():JQuery = js.native
-  def fadeIn(duration:Number):JQuery = js.native
   def fadeIn(easing:String):JQuery = js.native
   def fadeIn(easing:String, complete:js.ThisFunction0[Element, Any]):JQuery = js.native
   def fadeIn(
     duration:Number | String,
-    easing:UndefOr[String] = js.undefined,
-    complete:UndefOr[js.ThisFunction0[Element, Any]] = js.undefined):JQuery = js.native
+    easing:String = ???,
+    complete:js.ThisFunction0[Element, Any] = ???):JQuery = js.native
   def fadeIn(options:JQueryAnimationSettings):JQuery = js.native
   
   /**
    * Hide the matched elements by fading them to transparent.
    */
   def fadeOut():JQuery = js.native
-  def fadeOut(duration:Number):JQuery = js.native
   def fadeOut(easing:String):JQuery = js.native
   def fadeOut(easing:String, complete:js.ThisFunction0[Element, Any]):JQuery = js.native
   def fadeOut(
     duration:Number | String,
-    easing:UndefOr[String] = js.undefined,
-    complete:UndefOr[js.ThisFunction0[Element, Any]] = js.undefined):JQuery = js.native
+    easing:String = ???,
+    complete:js.ThisFunction0[Element, Any] = ???):JQuery = js.native
   def fadeOut(options:JQueryAnimationSettings):JQuery = js.native
   
   /**
@@ -338,20 +324,19 @@ trait JQuery extends js.Object {
   def fadeTo(
     duration:String | Number, 
     opacity:Number, 
-    easing:UndefOr[String] = js.undefined, 
-    complete:UndefOr[js.ThisFunction0[Element, Any]] = js.undefined):JQuery = js.native
+    easing:String = ???, 
+    complete:js.ThisFunction0[Element, Any] = ???):JQuery = js.native
 
   /**
    * Display or hide the matched elements by animating their opacity.
    */
   def fadeToggle():JQuery = js.native
-  def fadeToggle(duration:Number):JQuery = js.native
   def fadeToggle(easing:String):JQuery = js.native
   def fadeToggle(easing:String, complete:js.ThisFunction0[Element, Any]):JQuery = js.native
   def fadeToggle(
     duration:Number | String,
-    easing:UndefOr[String] = js.undefined,
-    complete:UndefOr[js.ThisFunction0[Element, Any]] = js.undefined):JQuery = js.native
+    easing:String = ???,
+    complete:js.ThisFunction0[Element, Any] = ???):JQuery = js.native
   def fadeToggle(options:JQueryAnimationSettings):JQuery = js.native
 
   /**
@@ -369,7 +354,7 @@ trait JQuery extends js.Object {
   /**
    * Stop the currently-running animation, remove all queued animations, and complete all animations for the matched elements.
    */
-  def finish(queue:UndefOr[String] = "fx"):JQuery = js.native
+  def finish(queue:String = "fx"):JQuery = js.native
   
   /**
    * Reduce the set of matched elements to the first in the set.
@@ -380,22 +365,22 @@ trait JQuery extends js.Object {
    * Bind an event handler to the "focus" JavaScript event, or trigger that event on an element.
    */
   def focus():JQuery = js.native
-  def focus(func:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def focus(eventData:Any, func:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  def focus(handler:EventHandler):JQuery = js.native
+  def focus(eventData:Any, handler:EventHandler):JQuery = js.native
   
   /**
    * Bind an event handler to the "focusin" event.
    */
   def focusin():JQuery = js.native
-  def focusin(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def focusin(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native  
+  def focusin(handler:EventHandler):JQuery = js.native
+  def focusin(eventData:Any, handler:EventHandler):JQuery = js.native  
   
   /**
    * Bind an event handler to the "focusout" event.
    */
   def focusout():JQuery = js.native
-  def focusout(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def focusout(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native  
+  def focusout(handler:EventHandler):JQuery = js.native
+  def focusout(eventData:Any, handler:EventHandler):JQuery = js.native  
 
   /**
    * Retrieve one of the elements matched by the jQuery object.
@@ -433,18 +418,17 @@ trait JQuery extends js.Object {
    * Hide the matched elements.
    */
   def hide():JQuery = js.native
-  def hide(duration:String):JQuery = js.native
-  def hide(duration:String, complete:js.Function):JQuery = js.native
-  def hide(duration:String, easing:String):JQuery = js.native
-  def hide(duration:String, easing:String, complete:js.Function):JQuery = js.native
-  def hide(duration:Int):JQuery = js.native
-  def hide(duration:Int, complete:js.Function):JQuery = js.native
-  def hide(duration:Int, easing:String):JQuery = js.native
-  def hide(duration:Int, easing:String, complete:js.Function):JQuery = js.native
-  // TODO: add the complex version of hide(), with a Builder to construct the Options.
+  def hide(duration:String | Int, complete:js.Function):JQuery = js.native
+  def hide(duration:String | Int, easing:String = ???, complete:js.Function = ???):JQuery = js.native
   
-  def hover(handlerIn:js.ThisFunction1[Element, JQueryEventObject, Any], handlerOut:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def hover(handlerInOut:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  /**
+   * Bind two handlers to the matched elements, to be executed when the mouse pointer enters and leaves the elements.
+   */
+  def hover(handlerIn:EventHandler, handlerOut:EventHandler):JQuery = js.native
+  /**
+   * Bind a single handler to the matched elements, to be executed when the mouse pointer enters or leaves the elements.
+   */
+  def hover(handlerInOut:EventHandler):JQuery = js.native
   
   /**
    * Get the HTML contents of the first element in the set of matched elements.
@@ -503,22 +487,22 @@ trait JQuery extends js.Object {
   /**
    * Bind an event handler to the "keydown" JavaScript event, or trigger that event on an element.
    */
-  def keydown(handler:js.Function1[JQueryEventObject, Any]):JQuery = js.native
-  def keydown(eventData:Any, handler:js.Function1[JQueryEventObject, Any]):JQuery = js.native
+  def keydown(handler:EventHandler):JQuery = js.native
+  def keydown(eventData:Any, handler:EventHandler):JQuery = js.native
   def keydown():JQuery = js.native
   
   /**
    * Bind an event handler to the "keypress" JavaScript event, or trigger that event on an element.
    */
-  def keypress(handler:js.Function1[JQueryEventObject, Any]):JQuery = js.native
-  def keypress(eventData:Any, handler:js.Function1[JQueryEventObject, Any]):JQuery = js.native
+  def keypress(handler:EventHandler):JQuery = js.native
+  def keypress(eventData:Any, handler:EventHandler):JQuery = js.native
   def keypress():JQuery = js.native
   
   /**
    * Bind an event handler to the "keyup" JavaScript event, or trigger that event on an element.
    */
-  def keyup(handler:js.Function1[JQueryEventObject, Any]):JQuery = js.native
-  def keyup(eventData:Any, handler:js.Function1[JQueryEventObject, Any]):JQuery = js.native
+  def keyup(handler:EventHandler):JQuery = js.native
+  def keyup(eventData:Any, handler:EventHandler):JQuery = js.native
   def keyup():JQuery = js.native
   
   /**
@@ -558,61 +542,61 @@ trait JQuery extends js.Object {
    * Bind an event handler to the "mousedown" JavaScript event, or trigger that event on an element.
    */
   def mousedown():JQuery = js.native
-  def mousedown(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def mousedown(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  def mousedown(handler:EventHandler):JQuery = js.native
+  def mousedown(eventData:Any, handler:EventHandler):JQuery = js.native
   
   /**
    * Bind an event handler to the "mouseenter" JavaScript event, or trigger that event on an element.
    */
   def mouseenter():JQuery = js.native
-  def mouseenter(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def mouseenter(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  def mouseenter(handler:EventHandler):JQuery = js.native
+  def mouseenter(eventData:Any, handler:EventHandler):JQuery = js.native
   
   /**
    * Bind an event handler to the "mouseleave" JavaScript event, or trigger that event on an element.
    */
   def mouseleave():JQuery = js.native
-  def mouseleave(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def mouseleave(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  def mouseleave(handler:EventHandler):JQuery = js.native
+  def mouseleave(eventData:Any, handler:EventHandler):JQuery = js.native
   
   /**
    * Bind an event handler to the "mousemove" JavaScript event, or trigger that event on an element.
    */
   def mousemove():JQuery = js.native
-  def mousemove(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def mousemove(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  def mousemove(handler:EventHandler):JQuery = js.native
+  def mousemove(eventData:Any, handler:EventHandler):JQuery = js.native
   
   /**
    * Bind an event handler to the "mouseout" JavaScript event, or trigger that event on an element.
    */
   def mouseout():JQuery = js.native
-  def mouseout(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def mouseout(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  def mouseout(handler:EventHandler):JQuery = js.native
+  def mouseout(eventData:Any, handler:EventHandler):JQuery = js.native
   
   /**
    * Bind an event handler to the "mouseover" JavaScript event, or trigger that event on an element.
    */
   def mouseover():JQuery = js.native
-  def mouseover(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def mouseover(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  def mouseover(handler:EventHandler):JQuery = js.native
+  def mouseover(eventData:Any, handler:EventHandler):JQuery = js.native
   
   /**
    * Bind an event handler to the "mouseup" JavaScript event, or trigger that event on an element.
    */
   def mouseup():JQuery = js.native
-  def mouseup(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def mouseup(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  def mouseup(handler:EventHandler):JQuery = js.native
+  def mouseup(eventData:Any, handler:EventHandler):JQuery = js.native
   
   /**
    * Get the immediately following sibling of each element in the set of matched elements. 
    * If a selector is provided, it retrieves the next sibling only if it matches that selector.
    */
-  def next(selector:UndefOr[String] = js.undefined):JQuery = js.native
+  def next(selector:String = ???):JQuery = js.native
   
   /**
    * Get all following siblings of each element in the set of matched elements, optionally filtered by a selector.
    */
-  def nextAll(selector:UndefOr[String] = js.undefined):JQuery = js.native
+  def nextAll(selector:String = ???):JQuery = js.native
   
   /**
    * Get all following siblings of each element up to but not including the element matched by the selector, DOM node, or jQuery object passed.
@@ -620,7 +604,7 @@ trait JQuery extends js.Object {
   def nextUntil():JQuery = js.native
   def nextUntil(selector:String):JQuery = js.native
   def nextUntil(selector:String, filter:String):JQuery = js.native
-  def nextUntil(element:Element | JQuery, filter:UndefOr[String] = js.undefined):JQuery = js.native
+  def nextUntil(element:Element | JQuery, filter:String = ???):JQuery = js.native
   
   /**
    * Remove elements from the set of matched elements.
@@ -631,14 +615,13 @@ trait JQuery extends js.Object {
   /**
    * Remove an event handler.
    */
-  def off(events: String, selector: String, handler: js.ThisFunction1[Element, JQueryEventObject, Any]): JQuery = js.native
-  def off(events: String, selector: String): JQuery = js.native
-  def off(events:String, handler: js.Function1[JQueryEventObject, Any]): JQuery = js.native
   def off(events: String): JQuery = js.native
-  def off(): JQuery = js.native
-  def off(eventsMap: js.Dictionary[js.ThisFunction1[Element, JQueryEventObject, Any]], selector: String): JQuery = js.native
-  def off(eventsMap: js.Dictionary[js.ThisFunction1[Element, JQueryEventObject, Any]]): JQuery = js.native
+  def off(events: String, selector: String): JQuery = js.native
+  def off(events: String, selector: String, handler:EventHandler): JQuery = js.native
+  def off(events: String, handler:EventHandler): JQuery = js.native
+  def off(eventsMap: js.Dictionary[EventHandler], selector: String = ???): JQuery = js.native
   def off(event:JQueryEventObject):JQuery = js.native
+  def off(): JQuery = js.native
   
   /**
    * Get the current coordinates of the first element in the set of matched elements, relative to the document.
@@ -672,12 +655,10 @@ trait JQuery extends js.Object {
    * So remember to pass something for the data parameter, in order to get the compiler to do the right thing. 
    * If you don't, your function *will* match the (String, String, Any) version of the signature, but it won't work correctly.
    */
-  def on(events:String, selector: String, data: Any, handler: js.ThisFunction1[Element, JQueryEventObject, Any]): JQuery = js.native
-  def on(events:String, handler: js.ThisFunction0[Element, Any]):JQuery = js.native
-  def on(events:String, handler: js.ThisFunction1[Element, JQueryEventObject, Any]): JQuery = js.native
+  def on(events:String, selector: String, data: Any, handler:EventHandler): JQuery = js.native
+  def on(events:String, handler:EventHandler):JQuery = js.native
   def on(events:String, handler: js.ThisFunction2[Element, JQueryEventObject, Any, Any]): JQuery = js.native
   def on(events:String, handler: js.ThisFunction3[Element, JQueryEventObject, Any, Any, Any]): JQuery = js.native
-  def on(events:String, handler: js.Function1[JQueryEventObject, Any]): JQuery = js.native
   def on(events:String, handler: js.Function2[JQueryEventObject, Any, Any]): JQuery = js.native
   def on(events:String, handler: js.Function3[JQueryEventObject, Any, Any, Any]): JQuery = js.native
   /**
@@ -692,19 +673,17 @@ trait JQuery extends js.Object {
   def on(events: String, selector: String): JQuery = js.native
   def on(events: String, turnOff:Boolean): JQuery = js.native
   def on(events: String): JQuery = js.native
-  def on(eventsMap: js.Dictionary[js.ThisFunction1[Element, JQueryEventObject, Any]], selector: String, data: Any): JQuery = js.native
-  def on(eventsMap: js.Dictionary[js.ThisFunction1[Element, JQueryEventObject, Any]], selector: String): JQuery = js.native
-  def on(eventsMap: js.Dictionary[js.ThisFunction1[Element, JQueryEventObject, Any]]): JQuery = js.native
+  def on(eventsMap: js.Dictionary[EventHandler], selector: String, data: Any): JQuery = js.native
+  def on(eventsMap: js.Dictionary[EventHandler], selector: String): JQuery = js.native
+  def on(eventsMap: js.Dictionary[EventHandler]): JQuery = js.native
 
   /**
    * Attach a handler to an event for the elements. The handler is executed at most once per element per event type.
    */
-  def one(events:String, selector: String, data: Any, handler: js.ThisFunction1[Element, JQueryEventObject, Any]): JQuery = js.native
-  def one(events:String, handler: js.ThisFunction0[Element, Any]):JQuery = js.native
-  def one(events:String, handler: js.ThisFunction1[Element, JQueryEventObject, Any]): JQuery = js.native
+  def one(events:String, selector: String, data: Any, handler:EventHandler): JQuery = js.native
+  def one(events:String, handler:EventHandler):JQuery = js.native
   def one(events:String, handler: js.ThisFunction2[Element, JQueryEventObject, Any, Any]): JQuery = js.native
   def one(events:String, handler: js.ThisFunction3[Element, JQueryEventObject, Any, Any, Any]): JQuery = js.native
-  def one(events:String, handler: js.Function1[JQueryEventObject, Any]): JQuery = js.native
   def one(events:String, handler: js.Function2[JQueryEventObject, Any, Any]): JQuery = js.native
   def one(events:String, handler: js.Function3[JQueryEventObject, Any, Any, Any]): JQuery = js.native
   def one(events: String, selector: String, data: Any, turnOff:Boolean): JQuery = js.native
@@ -712,9 +691,9 @@ trait JQuery extends js.Object {
   def one(events: String, selector: String): JQuery = js.native
   def one(events: String, turnOff:Boolean): JQuery = js.native
   def one(events: String): JQuery = js.native
-  def one(eventsMap: js.Dictionary[js.ThisFunction1[Element, JQueryEventObject, Any]], selector: String, data: Any): JQuery = js.native
-  def one(eventsMap: js.Dictionary[js.ThisFunction1[Element, JQueryEventObject, Any]], selector: String): JQuery = js.native
-  def one(eventsMap: js.Dictionary[js.ThisFunction1[Element, JQueryEventObject, Any]]): JQuery = js.native
+  def one(eventsMap: js.Dictionary[EventHandler], selector: String, data: Any): JQuery = js.native
+  def one(eventsMap: js.Dictionary[EventHandler], selector: String): JQuery = js.native
+  def one(eventsMap: js.Dictionary[EventHandler]): JQuery = js.native
   
   /**
    * Get the current computed height for the first element in the set of matched elements, including
@@ -751,7 +730,7 @@ trait JQuery extends js.Object {
   def parentsUntil():JQuery = js.native
   def parentsUntil(selector:String):JQuery = js.native
   def parentsUntil(selector:String, filter:String):JQuery = js.native
-  def parentsUntil(element:Element | JQuery, filter:UndefOr[String] = js.undefined):JQuery = js.native
+  def parentsUntil(element:Element | JQuery, filter:String = ???):JQuery = js.native
   
   /**
    * Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.
@@ -785,12 +764,12 @@ trait JQuery extends js.Object {
   def prevUntil():JQuery = js.native
   def prevUntil(selector:String):JQuery = js.native
   def prevUntil(selector:String, filter:String):JQuery = js.native
-  def prevUntil(element:Element | JQuery, filter:UndefOr[String] = js.undefined):JQuery = js.native
+  def prevUntil(element:Element | JQuery, filter:String = ???):JQuery = js.native
 
   /**
    * Return a Promise object to observe when all actions of a certain type bound to the collection, queued or not, have finished.
    */
-  def promise(tpe:UndefOr[String] = js.undefined, target:UndefOr[js.Object] = js.undefined):JQueryPromise = js.native
+  def promise(tpe:String = ???, target:js.Object = ???):JQueryPromise = js.native
   
   /**
    * Get the value of a property for the first element in the set of matched elements.
@@ -812,7 +791,7 @@ trait JQuery extends js.Object {
   /**
    * Show the queue of functions to be executed on the matched elements.
    */
-  def queue(queueName:UndefOr[String] = js.undefined):js.Array[js.Function] = js.native
+  def queue(queueName:String = ???):js.Array[js.Function] = js.native
   def queue(newQueue:Array[js.Function]):JQuery = js.native
   def queue(queueName:String, newQueue:Array[js.Function]):JQuery = js.native
   def queue(callback:js.Function1[js.Function0[js.Any], Any]):JQuery = js.native
@@ -866,17 +845,16 @@ trait JQuery extends js.Object {
   /**
    * Bind an event handler to the "resize" JavaScript event, or trigger that event on an element.
    */
-  def resize(func:js.Function1[JQueryEventObject, Any]):JQuery = js.native
-  def resize(eventData:Any, handler:js.Function1[JQueryEventObject, Any]):JQuery = js.native
-  def resize(func:js.Function0[Any]):JQuery = js.native
+  def resize(func:EventHandler):JQuery = js.native
+  def resize(eventData:Any, handler:EventHandler):JQuery = js.native
   def resize():JQuery = js.native
   
   /**
    * Bind an event handler to the "scroll" JavaScript event, or trigger that event on an element.
    */
   def scroll():JQuery = js.native
-  def scroll(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def scroll(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  def scroll(handler:EventHandler):JQuery = js.native
+  def scroll(eventData:Any, handler:EventHandler):JQuery = js.native
   
   /**
    * Get the current horizontal position of the scroll bar for the first element in the set of matched elements.
@@ -901,8 +879,8 @@ trait JQuery extends js.Object {
    * Bind an event handler to the "select" JavaScript event, or trigger that event on an element.
    */
   def select():JQuery = js.native
-  def select(handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
-  def select(eventData:Any, handler:js.ThisFunction1[Element, JQueryEventObject, Any]):JQuery = js.native
+  def select(handler:EventHandler):JQuery = js.native
+  def select(eventData:Any, handler:EventHandler):JQuery = js.native
   
   /**
    * Encode a set of form elements as a string for submission.
@@ -918,55 +896,40 @@ trait JQuery extends js.Object {
    * Hide the matched elements.
    */
   def show():JQuery = js.native
-  def show(duration:String):JQuery = js.native
-  def show(duration:String, complete:js.Function):JQuery = js.native
-  def show(duration:String, easing:String):JQuery = js.native
-  def show(duration:String, easing:String, complete:js.Function):JQuery = js.native
-  def show(duration:Int):JQuery = js.native
-  def show(duration:Int, complete:js.Function):JQuery = js.native
-  def show(duration:Int, easing:String):JQuery = js.native
-  def show(duration:Int, easing:String, complete:js.Function):JQuery = js.native
-  // TODO: add the complex version of show(), with a Builder to construct the Options.
+  def show(duration:String | Int, complete:js.Function):JQuery = js.native
+  def show(duration:String | Int, easing:String = ???, complete:js.Function = ???):JQuery = js.native
 
   /**
    * Get the siblings of each element in the set of matched elements, optionally filtered by a selector.
    */
-  def siblings(selector:UndefOr[String] = js.undefined):JQuery = js.native
+  def siblings(selector:String = ???):JQuery = js.native
   
   /**
    * Reduce the set of matched elements to a subset specified by a range of indices.
    */
-  def slice(start:Integer, end:UndefOr[Integer] = js.undefined):JQuery = js.native
+  def slice(start:Integer, end:Integer = ???):JQuery = js.native
   
   /**
    * Display the matched elements with a sliding motion.
    */
   def slideDown():JQuery = js.native
-  def slideDown(duration:String):JQuery = js.native
-  def slideDown(duration:String, complete:js.Function):JQuery = js.native
-  def slideDown(duration:Int):JQuery = js.native
-  def slideDown(duration:Int, complete:js.Function):JQuery = js.native
+  def slideDown(duration:String | Int, complete:js.Function = ???):JQuery = js.native
   
   /**
    * Display or hide the matched elements with a sliding motion.
    */
   def slideToggle():JQuery = js.native
-  def slideToggle(duration:Number):JQuery = js.native
-  def slideToggle(easing:String):JQuery = js.native
   def slideToggle(
-    duration:Number | String = 400,
-    easing:UndefOr[String] = "swing",
-    complete:UndefOr[js.ThisFunction0[Element, Any]] = js.undefined):JQuery = js.native
+    duration:Number | String,
+    easing:String = "swing",
+    complete:js.ThisFunction0[Element, Any] = ???):JQuery = js.native
   def slideToggle(options:JQueryAnimationSettings):JQuery = js.native
   
   /**
    * Hide the matched elements with a sliding motion.
    */
   def slideUp():JQuery = js.native
-  def slideUp(duration:String):JQuery = js.native
-  def slideUp(duration:String, complete:js.Function):JQuery = js.native
-  def slideUp(duration:Int):JQuery = js.native
-  def slideUp(duration:Int, complete:js.Function):JQuery = js.native
+  def slideUp(duration:String | Int, complete:js.Function = ???):JQuery = js.native
   
   /**
    * Stop the currently-running animation on the matched elements.
@@ -974,7 +937,7 @@ trait JQuery extends js.Object {
   def stop():JQuery = js.native
   def stop(clearQueue:Boolean):JQuery = js.native
   def stop(clearQueue:Boolean, jumpToEnd:Boolean):JQuery = js.native
-  def stop(queue:String, clearQueue:UndefOr[Boolean] = js.undefined, jumpToEnd:UndefOr[Boolean] = js.undefined):JQuery = js.native
+  def stop(queue:String, clearQueue:Boolean = false, jumpToEnd:Boolean = false):JQuery = js.native
   
   /**
    * Bind an event handler to the "submit" JavaScript event, or trigger that event on an element.
@@ -1004,7 +967,7 @@ trait JQuery extends js.Object {
    * depending on either the class's presence or the value of the state argument.
    */
   def toggleClass():JQuery = js.native
-  def toggleClass(className:String, state:UndefOr[Boolean] = js.undefined):JQuery = js.native
+  def toggleClass(className:String, state:Boolean = ???):JQuery = js.native
   def toggleClass(state:Boolean):JQuery = js.native
   def toggleClass(func:js.Function3[Integer, String, Boolean, String]):JQuery = js.native
   def toggleClass(func:js.Function3[Integer, String, Boolean, String], state:Boolean):JQuery = js.native
@@ -1027,7 +990,7 @@ trait JQuery extends js.Object {
   def unbind():JQuery = js.native
   def unbind(event:JQueryEventObject):JQuery = js.native
   def unbind(eventType:String, falsing:Boolean):JQuery = js.native
-  def unbind(eventType:String, handler:UndefOr[js.ThisFunction1[Element, JQueryEventObject, Any]] = js.undefined):JQuery = js.native
+  def unbind(eventType:String, handler:js.ThisFunction1[Element, JQueryEventObject, Any] = ???):JQuery = js.native
   
   /**
    * Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place.

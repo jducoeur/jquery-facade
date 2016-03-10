@@ -43,6 +43,22 @@ package object jquery {
    */
   type AttrVal = String | Int | Boolean
   
+  /**
+   * This union type covers the possible signatures of functions to pass into event-registration
+   * functions like "click" or "hover".
+   */
+  type EventHandler = 
+    js.Function0[Any] | 
+    js.Function1[JQueryEventObject, Any] |
+    js.ThisFunction0[Element, Any] |
+    js.ThisFunction1[Element, JQueryEventObject, Any]
+  // The | operator interferes with the inferred converters from Scala functions to JS ones, so we
+  // need to give it a hand:
+  implicit def f02EventHandler(func:scala.Function0[Any]):EventHandler = { func:js.Function0[Any] }
+  implicit def f12EventHandler(func:scala.Function1[JQueryEventObject, Any]):EventHandler = { func:js.Function1[JQueryEventObject, Any] }
+  implicit def ft02EventHandler(func:scala.Function1[Element, Any]):EventHandler = { func:js.ThisFunction0[Element, Any] }
+  implicit def ft12EventHandler(func:scala.Function2[Element, JQueryEventObject, Any]):EventHandler = { func:js.ThisFunction1[Element, JQueryEventObject, Any] }
+  
   type Number = Double | Int
   
   /**

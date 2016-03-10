@@ -57,7 +57,7 @@ object JQueryStatic extends js.Object {
    * 
    * TODO: we ought to add a strongly-typed extension that defines the flags properly.
    */
-  def Callbacks(flags:UndefOr[String] = js.undefined):JQueryCallbacks = js.native
+  def Callbacks(flags:String = ""):JQueryCallbacks = js.native
   
   /**
    * Check to see if a DOM element is a descendant of another DOM element.
@@ -92,14 +92,14 @@ object JQueryStatic extends js.Object {
    * callbacks into callback queues, invoke callback queues, and relay the success or failure state 
    * of any synchronous or asynchronous function.
    */
-  def Deferred(beforeStart:UndefOr[js.Function1[JQueryDeferred, _]] = js.undefined):JQueryDeferred = js.native
+  def Deferred(beforeStart:js.Function1[JQueryDeferred, _] = ???):JQueryDeferred = js.native
   
   /**
    * Execute the next function on the queue for the matched element.
    * 
    * Note: This is a low-level method, you should probably use .dequeue() instead.
    */
-  def dequeue(element:Element, queueName:UndefOr[String] = "fx"):Unit = js.native
+  def dequeue(element:Element, queueName:String = "fx"):Unit = js.native
   
   /**
    * A generic iterator function, which can be used to seamlessly iterate over both objects and arrays. 
@@ -145,24 +145,21 @@ object JQueryStatic extends js.Object {
    */
   def get():JQueryXHR = js.native
   def get(settings:JQueryAjaxSettings):JQueryXHR = js.native
-  def get(url:String, data:js.Object, success:js.Function3[js.Object, String, JQueryXHR, Any], dataType:String):JQueryXHR = js.native
   def get(
     url:String, 
-    data:String, 
-    success:UndefOr[js.Function3[js.Object, String, JQueryXHR, Any]] = undefined, 
-    dataType:UndefOr[String] = undefined):JQueryXHR = js.native
+    data:String | js.Object = ???, 
+    success:js.Function3[js.Object, String, JQueryXHR, Any] = ???, 
+    dataType:String = ???):JQueryXHR = js.native
   
   /**
    * Load JSON-encoded data from the server using a GET HTTP request.
    */
-  def getJSON(url:String):JQueryXHR = js.native
-  def getJSON(url:String, data:String | js.Object):JQueryXHR = js.native
-  def getJSON(url:String, data:String | js.Object, success:js.Function3[js.Object, String, JQueryXHR, Any]):JQueryXHR = js.native
+  def getJSON(url:String, data:String | js.Object = ???, success:js.Function3[js.Object, String, JQueryXHR, Any] = ???):JQueryXHR = js.native
   
   /**
    * Load a JavaScript file from the server using a GET HTTP request, then execute it.
    */
-  def getScript(url:String, success:UndefOr[js.Function3[String, String, JQueryXHR, Any]] = undefined):JQueryXHR = js.native
+  def getScript(url:String, success:js.Function3[String, String, JQueryXHR, Any] = ???):JQueryXHR = js.native
   
   /**
    * Execute some JavaScript code globally.
@@ -175,7 +172,7 @@ object JQueryStatic extends js.Object {
   def grep(
     array:js.Array[js.Any] | js.Object, 
     func:js.ThisFunction2[Element, js.Object, Integer, Boolean], 
-    invert:UndefOr[Boolean] = false):js.Array[js.Any] = js.native
+    invert:Boolean = false):js.Array[js.Any] = js.native
   
   /**
    * Determine whether an element has any jQuery data associated with it.
@@ -190,7 +187,7 @@ object JQueryStatic extends js.Object {
   /**
    * Search for a specified value within an array and return its index (or -1 if not found).
    */
-  def inArray(value:js.Any, array:js.Array[js.Any], fromIndex:UndefOr[Int] = 0):Int = js.native
+  def inArray(value:js.Any, array:js.Array[js.Any], fromIndex:Int = 0):Int = js.native
   
   /**
    * Check to see if an object is empty (contains no enumerable properties).
@@ -243,7 +240,7 @@ object JQueryStatic extends js.Object {
   /**
    * Relinquish jQuery's control of the $ variable.
    */
-  def noConflict(removeAll:UndefOr[Boolean] = undefined):js.Object = js.native
+  def noConflict(removeAll:Boolean = false):js.Object = js.native
   
   /**
    * An empty function.
@@ -260,12 +257,12 @@ object JQueryStatic extends js.Object {
    * for use in a URL query string or Ajax request. In case a jQuery object is passed, 
    * it should contain input elements with name/value properties.
    */
-  def param(obj:js.Dictionary[js.Any] | JQuery | js.Array[JQuerySerializeArrayElement], traditional:UndefOr[Boolean] = false):String = js.native
+  def param(obj:js.Dictionary[js.Any] | JQuery | js.Array[JQuerySerializeArrayElement], traditional:Boolean = false):String = js.native
   
   /**
    * Parses a string into an array of DOM nodes.
    */
-  def parseHTML(data:String, context:UndefOr[Element] = js.undefined, keepScripts:UndefOr[Boolean] = false):js.Array[dom.Node] = js.native
+  def parseHTML(data:String, context:Element = ???, keepScripts:Boolean = false):js.Array[dom.Node] = js.native
   
   /**
    * Takes a well-formed JSON string and returns the resulting JavaScript value.
@@ -282,12 +279,11 @@ object JQueryStatic extends js.Object {
    */
   def post():JQueryXHR = js.native
   def post(settings:JQueryAjaxSettings):JQueryXHR = js.native
-  def post(url:String, data:js.Object, success:js.Function3[js.Object, String, JQueryXHR, Any], dataType:String):JQueryXHR = js.native
   def post(
     url:String, 
-    data:String, 
-    success:UndefOr[js.Function3[js.Object, String, JQueryXHR, Any]] = undefined, 
-    dataType:UndefOr[String] = undefined):JQueryXHR = js.native
+    data:String | js.Object, 
+    success:js.Function3[js.Object, String, JQueryXHR, Any] = ???, 
+    dataType:String = ???):JQueryXHR = js.native
     
   /**
    * Takes a function and returns a new one that will always have a particular context.
@@ -300,12 +296,12 @@ object JQueryStatic extends js.Object {
    * 
    * Note: This is a low-level method, you should probably use .queue() instead.
    */
-  def queue(element:Element, queueName:UndefOr[String] = "fx"):js.Array[js.Function] = js.native
+  def queue(element:Element, queueName:String = "fx"):js.Array[js.Function] = js.native
   
   /**
    * Remove a previously-stored piece of data.
    */
-  def removeData(element:Element, name:UndefOr[String] = js.undefined):JQuery = js.native
+  def removeData(element:Element, name:String = ???):JQuery = js.native
   
   /**
    * Remove the whitespace from the beginning and end of a string.
@@ -351,7 +347,7 @@ trait JQueryCallbacks extends js.Object {
   def fire(arguments:Any*):JQueryCallbacks = js.native
   def fired(): Boolean = js.native
   def fireWith(context: js.Any, args: js.Any*):JQueryCallbacks = js.native
-  def has(callback: UndefOr[js.Function] = js.undefined): Boolean = js.native
+  def has(callback: js.Function = ???): Boolean = js.native
   def lock():JQueryCallbacks = js.native
   def locked(): Boolean = js.native
   def remove(callbacks: js.Function*):JQueryCallbacks = js.native
