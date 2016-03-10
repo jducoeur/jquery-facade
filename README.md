@@ -28,6 +28,13 @@ import org.querki.jquery._
 at the top of your file. While individual pieces *can* be imported, this facade uses a fair number of implicits
 in order to do its thing, so it is usually easier to just import the entire thing.
 
+Note that the entry points in here are only lightly documented, usually with the headline of what the function
+does. I'm not going to try to duplicate everything, so I strongly recommend keeping [the official jQuery API
+documentation](http://api.jquery.com/) open while you're working with this facade -- it is the official word
+on how things are supposed to work, and helps explain some of the odder nuances. (Eg, entry points that do
+different things depending on the format of the string you pass in.) If you find inconsistencies between the
+API documentation and this facade, please raise Issues.
+
 The most important function in this facade is `$()`, which works the same way it does in JavaScript: it
 "selects" the given Element, or the Elements indicated by the String Selector. 
 (Or creates a node from a given HTML String, although I recommend using Scalatags for that instead -- 
