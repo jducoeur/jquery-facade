@@ -24,8 +24,9 @@ import dom.Element
  * of potential overloads.
  * 
  * Many parameters are polymorphic. We often use | (type union) to define these, but | and UndefOr don't mix,
- * so we often have to spell things out in more detail. Note that there are several common unions
- * such as Selector defined in package.scala.
+ * so we often have to spell things out in more detail. Also, you can't use a js.Function or js.ThisFunction
+ * in a | expression, because it interferes with the compiler's implicit conversion from a Scala function
+ * to a js.Function. Note that there are several common unions such as Selector defined in package.scala.
  * 
  * Things are also often spelled out more explicitly than you might expect, because Scala restricts us to
  * one overload per method with default parameters; this limits our usage of UndefOr.
@@ -277,7 +278,8 @@ trait JQuery extends js.Object {
    * You can stop the loop from within the callback function by returning false. Otherwise, the return
    * value is irrelevant.
    */
-  def each(func:js.ThisFunction0[Element, Any] | js.ThisFunction1[Element, Int, Any]):JQuery = js.native
+  def each(func:js.ThisFunction0[Element, Any]):JQuery = js.native
+  def each(func:js.ThisFunction1[Element, Int, Any]):JQuery = js.native
   
   /**
    * Remove all child nodes of the set of matched elements from the DOM.
