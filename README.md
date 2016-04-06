@@ -137,6 +137,8 @@ Pull Requests are welcome, but please observe the style guidelines of this libra
 
 ### What's New
 
+* **1.0-RC3** -- Fix to the facade for `each`; this had been combining js.Function types with `|`, and that turns out to interfere with the compiler's ability to infer the cast from Scala to JavaScript function types. So switched this to a couple of overloads instead.
+
 * **1.0-RC2** -- Introduced the `EventHandler` pseudo-union type, and switched to use that for all of the event-binding entry points. This should make the facade more consistent about letting you use any of the sensible callback signatures for those functions. See the definition of `EventHandler` (in `package.scala`) for the possible signatures.
 
     Also, switched away from declaring optional parameters as `UndefOr` and `= js.undefined`, to using `= ???` instead. This has the advantage of allowing me to use `|` for those parameters, which allows consolidation of quite a number of duplicate signatures. This change is *mostly* innocuous, but does mean you can't just pass `undefined` into those parameters. (This should never be necessary.)
