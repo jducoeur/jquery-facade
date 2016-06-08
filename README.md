@@ -52,6 +52,7 @@ to pass any of several types in to this parameter. The type unions currently in 
 * Selector -- this defines a way to get to an Element. It can be a String (using jQuery's [enhanced version of CSS Selectors](http://api.jquery.com/category/selectors/), an actual Element, or a js.Array[Element].
 * ElementDesc -- this is a sort of enhanced version of Selector that some methods use. It takes all of Selector, or another JQuery.
 * AttrVal -- this is any of the types that can be in an Attribute: String or Int or Boolean.
+* EventHandler -- this is the union of the main function signatures that can be passed into event-registration functions such as `click` or `on`.
 
 For ease of use, there are implicit defs for Selector and ElementDesc so that you can pass a Seq[Element] instead of a 
 js.Array[Element], and it will be auto-converted.
