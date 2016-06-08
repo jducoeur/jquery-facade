@@ -1,7 +1,3 @@
-import SonatypeKeys._
-
-sonatypeSettings
-
 lazy val root = project.in(file(".")).
   enablePlugins(ScalaJSPlugin)
 
@@ -13,13 +9,13 @@ version := "1.0-RC3"
 
 organization := "org.querki"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.8"
 
-crossScalaVersions := Seq("2.10.4", "2.11.7")
+crossScalaVersions := Seq("2.10.5", "2.11.8")
 
 libraryDependencies ++= Seq(
   "org.querki" %%% "querki-jsext" % "0.6",
-  "org.scala-js" %%% "scalajs-dom" % "0.8.0"
+  "org.scala-js" %%% "scalajs-dom" % "0.9.0"
 )
 
 jsDependencies in Test += RuntimeDOM
