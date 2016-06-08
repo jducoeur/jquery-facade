@@ -5,7 +5,7 @@ name := "jQuery Facade"
 
 normalizedName := "jquery-facade"
 
-version := "1.0-RC3"
+version := "1.0-RC4"
 
 organization := "org.querki"
 
