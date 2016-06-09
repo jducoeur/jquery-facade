@@ -611,8 +611,8 @@ trait JQuery extends js.Object {
   /**
    * Remove elements from the set of matched elements.
    */
-  def not(selector:ElementDesc)
-  def not(func:js.ThisFunction2[Element, Integer, Element, Boolean])
+  def not(selector:ElementDesc):JQuery = js.native
+  def not(func:js.ThisFunction2[Element, Integer, Element, Boolean]):JQuery = js.native
 
   /**
    * Remove an event handler.
