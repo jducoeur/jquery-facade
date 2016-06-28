@@ -13,6 +13,8 @@ jsDependencies += "org.webjars" % "jquery" % "2.2.1" / "jquery.js" minified "jqu
 ```
 Note that jquery-facade and the underlying jQuery library do *not* need to be exactly in sync, but I recommend using a reasonably recent version of the library.
 
+**Note:** jquery-facade has been focused on jQuery 2.x so far. There *will* be some small breaking changes (mainly the return types of a few functions) coming for jQuery 3.x, based on [the 3.0 upgrade guide](http://jquery.com/upgrade-guide/3.0/). I don't believe you need to panic about those, but be aware that they will be happening eventually. Also, I recommend reading that upgrade guide to see which functions are being deprecated in 3.x.
+
 ### Using jquery-facade
 
 **The Important bit:** mostly, this facade should just work as expected. We discuss the details a lot
