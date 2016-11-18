@@ -5,17 +5,17 @@ name := "jQuery Facade"
 
 normalizedName := "jquery-facade"
 
-version := "1.0-RC6"
+version := "1.0"
 
 organization := "org.querki"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.0"
 
-crossScalaVersions := Seq("2.10.5", "2.11.8")
+crossScalaVersions := Seq("2.10.5", "2.11.8", "2.12.0")
 
 libraryDependencies ++= Seq(
-  "org.querki" %%% "querki-jsext" % "0.7",
-  "org.scala-js" %%% "scalajs-dom" % "0.9.0"
+  "org.querki" %%% "querki-jsext" % "0.8",
+  "org.scala-js" %%% "scalajs-dom" % "0.9.1"
 )
 
 jsDependencies in Test += RuntimeDOM
