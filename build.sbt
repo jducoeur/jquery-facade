@@ -9,16 +9,18 @@ version := "1.0"
 
 organization := "org.querki"
 
-scalaVersion := "2.12.0"
+scalaVersion := "2.12.3"
 
-crossScalaVersions := Seq("2.10.5", "2.11.8", "2.12.0")
+scalacOptions in ThisBuild ++= Seq("-feature", "-deprecation")
+
+crossScalaVersions := Seq("2.10.5", "2.11.11", "2.12.3")
 
 libraryDependencies ++= Seq(
   "org.querki" %%% "querki-jsext" % "0.8",
-  "org.scala-js" %%% "scalajs-dom" % "0.9.1"
+  "org.scala-js" %%% "scalajs-dom" % "0.9.3"
 )
 
-jsDependencies in Test += RuntimeDOM
+jsEnv in Test := new org.scalajs.jsenv.jsdomnodejs.JSDOMNodeJSEnv
 
 homepage := Some(url("http://www.querki.net/"))
 
