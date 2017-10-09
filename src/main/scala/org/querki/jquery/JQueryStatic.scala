@@ -2,12 +2,12 @@ package org.querki.jquery
 
 import scala.scalajs.js
 import js.{undefined, UndefOr, |}
-import js.annotation.{JSName, JSImport}
+import js.annotation.{JSGlobal, JSName}
 import org.scalajs.dom
 import dom.Element
 
 @js.native
-@JSImport("jquery", JSImport.Namespace)
+@JSGlobal("jQuery")
 object JQueryStatic extends js.Object {
   
   /**

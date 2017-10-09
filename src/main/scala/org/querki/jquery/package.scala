@@ -1,5 +1,7 @@
 package org.querki
 
+import scala.language.implicitConversions
+
 import scala.scalajs.js
 import js.|
 import js.JSConverters._
