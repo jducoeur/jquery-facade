@@ -1061,7 +1061,7 @@ trait JQuery extends js.Object {
  *  cases. Code should not assume it is an integer. Also, dimensions may be incorrect when the page
  *  is zoomed by the user; browsers do not expose an API to detect this condition."
  */
-@ScalaJSDefined
+@js.native
 trait JQueryPosition extends js.Object {
   val left:Double
   val top:Double
