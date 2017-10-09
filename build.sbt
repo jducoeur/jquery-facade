@@ -5,7 +5,7 @@ name := "jQuery Facade"
 
 normalizedName := "jquery-facade"
 
-version := "1.0"
+version := "1.1"
 
 organization := "org.querki"
 
@@ -13,7 +13,7 @@ scalaVersion := "2.12.3"
 
 scalacOptions in ThisBuild ++= Seq("-feature", "-deprecation")
 
-crossScalaVersions := Seq("2.10.5", "2.11.11", "2.12.3")
+crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.3")
 
 libraryDependencies ++= Seq(
   "org.querki" %%% "querki-jsext" % "0.8",
