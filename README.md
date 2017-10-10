@@ -5,7 +5,7 @@ A strongly-typed Scala.js facade for jQuery
 
 To use jquery-facade, add this line to your libraryDependencies:
 ```
-"org.querki" %%% "jquery-facade" % "1.0"
+"org.querki" %%% "jquery-facade" % "1.1"
 ```
 **Important:** jquery-facade no longer automatically includes the underlying JavaScript jQuery library, because doing so was causing versioning problems for applications. So you will also need to include the jQuery in your jsDependencies. How you do so depends on how you want to include it. For example, in order to fetch the most recent version (as of this writing, 2.2.1) from the online WebJars collection, add the following line:
 ```
@@ -139,6 +139,8 @@ Pull Requests are welcome, but please observe the style guidelines of this libra
 * When a facade function takes a property bag, if it is understood to be name/value pairs in JS, declare it as js.Dictionary[T]. Often, we can constrain T; if not, just put js.Dictionary[js.Any], and it is at least explicit that it is name/value pairs.
 
 ### What's New
+
+* **1.1** -- Brought a bunch of versions up to more or less current; thanks to @cquiroz for the PR.
 
 * **1.0** -- It's been a long time since the last bug report, so I'm declaring this officially 1.0. Also, now cross-compiled to Scala 2.10, 2.11 and 2.12.
 
