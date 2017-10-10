@@ -5,7 +5,7 @@ A strongly-typed Scala.js facade for jQuery
 
 To use jquery-facade, add this line to your libraryDependencies:
 ```
-"org.querki" %%% "jquery-facade" % "1.0"
+"org.querki" %%% "jquery-facade" % "1.1"
 ```
 **Important:** jquery-facade no longer automatically includes the underlying JavaScript jQuery library, because doing so was causing versioning problems for applications. So you will also need to include the jQuery in your jsDependencies. How you do so depends on how you want to include it. For example, in order to fetch the most recent version (as of this writing, 2.2.1) from the online WebJars collection, add the following line:
 ```
@@ -137,6 +137,22 @@ Pull Requests are welcome, but please observe the style guidelines of this libra
 * If a callback parameter ignores its return value, the return type should be scala.Any.
 * Be careful about the return value from a method. Most JQuery methods return JQuery, but not all.
 * When a facade function takes a property bag, if it is understood to be name/value pairs in JS, declare it as js.Dictionary[T]. Often, we can constrain T; if not, just put js.Dictionary[js.Any], and it is at least explicit that it is name/value pairs.
+
+### Use with [scalajs-bundler](https://scalacenter.github.io/scalajs-bundler)
+
+You can use `jquery-facade` with Scala.js Bundler to import jQuery as an npm module. To do so enable `scalajs-bundler` on your `plugins.sbt`, then add the following lines to your sbt build definition:
+
+```
+enablePlugins(ScalaJSBundlerPlugin)
+
+libraryDependencies += "org.querki" %%% "jquery-facade" % "1.0"
+
+npmDependencies in Compile ++= Seq(
+  "jquery" -> "3.2.1"
+)
+```
+
+Note that there is no enforcing of the library version you are using but there could be incompatibilities in certain cases
 
 ### What's New
 
