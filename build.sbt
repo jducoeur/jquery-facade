@@ -9,11 +9,11 @@ version := "1.2"
 
 organization := "org.querki"
 
-scalaVersion := "2.12.3"
+scalaVersion := "2.12.8"
 
 scalacOptions in ThisBuild ++= Seq("-feature", "-deprecation")
 
-crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.3")
+crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.8")
 
 libraryDependencies ++= Seq(
   "org.querki" %%% "querki-jsext" % "0.8",
