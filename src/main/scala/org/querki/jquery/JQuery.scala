@@ -861,22 +861,24 @@ trait JQuery extends js.Object {
   /**
    * Get the current horizontal position of the scroll bar for the first element in the set of matched elements.
    */
-  def scrollLeft():Integer = js.native
-  def scrollLeft(value:Double | Integer):JQuery = js.native
+  def scrollLeft():Double = js.native
+  /**
+   * Note that this intentionally takes Double -- since recent browsers takes a Double (a full JS Number)
+   */
+  def scrollLeft(value:Double):JQuery = js.native
 
   /**
    * Get the current vertical position of the scroll bar for the first element in the set of
    * matched elements or set the vertical position of the scroll bar for every matched element.
    */
-  def scrollTop():Int = js.native
+  def scrollTop():Double = js.native
   /**
    * Set the current vertical position of the scroll bar for each of the set of matched elements.
-   * 
-   * Note that this intentionally takes Double -- while you usually want to set it to an Int, there
-   * are occasions when being able to take a Double (that is, a full JS Number) is convenient in code.
+   *
+   * Note that this intentionally takes Double -- since recent browsers takes a Double (a full JS Number)
    */
-  def scrollTop(value:Double | Integer):JQuery = js.native
-  
+  def scrollTop(value:Double):JQuery = js.native
+
   /**
    * Bind an event handler to the "select" JavaScript event, or trigger that event on an element.
    */
