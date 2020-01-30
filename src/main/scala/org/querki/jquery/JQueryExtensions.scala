@@ -29,7 +29,7 @@ class JQueryExtensions(jq:JQuery) {
    * results. Note that, unlike JQuery.map(), this produces the unwrapped results, since that
    * is typically what you want in Scala code. 
    */ 
-  def mapElems[T](func:Element => T):Seq[T] = jq.toArray().map(func)
+  def mapElems[T](func:Element => T):Seq[T] = jq.toArray().map(func).toSeq
   
   /**
    * The value of this Element; use this when it can only make sense as a String in context,
