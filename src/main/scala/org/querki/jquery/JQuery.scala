@@ -868,7 +868,7 @@ trait JQuery extends js.Object {
    * Get the current vertical position of the scroll bar for the first element in the set of
    * matched elements or set the vertical position of the scroll bar for every matched element.
    */
-  def scrollTop():Int = js.native
+  def scrollTop():Double = js.native
   /**
    * Set the current vertical position of the scroll bar for each of the set of matched elements.
    * 
