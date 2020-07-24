@@ -3,7 +3,7 @@ package org.querki.jquery
 import scala.scalajs.js
 import js.UndefOr
 import js.|
-import js.annotation.{JSName, ScalaJSDefined}
+import js.annotation.JSName
 
 import org.scalajs.dom
 import dom.Element
