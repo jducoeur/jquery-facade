@@ -1,5 +1,5 @@
 // Scala.js cross-build support
-val scalaJSVersion = Option(System.getenv("SCALAJS_VERSION")).getOrElse("1.0.1")
+val scalaJSVersion = Option(System.getenv("SCALAJS_VERSION")).getOrElse("1.7.0")
 
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % scalaJSVersion)
 

@@ -19,7 +19,7 @@ package object jquery {
    */
   type JQEvt = JQueryEventObject
   
-  implicit def builder2DialogOptions(builder:JQueryEventObjectBuilder) = builder._result
+  implicit def builder2DialogOptions(builder:JQueryEventObjectBuilder): JQueryEventObject = builder._result
 
   implicit def jQuery2Ext(jq:JQuery):JQueryExtensions = new JQueryExtensions(jq)
   
