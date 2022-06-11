@@ -1,6 +1,9 @@
 # jquery-facade
 A strongly-typed Scala.js facade for jQuery
 
+**Note:** at this point, I'm clearly not paying enough attention to this library. If someone motivated would like to fork it and take over maintenance,
+let's talk.
+
 ### Using the Library
 
 To use jquery-facade, add this line to your libraryDependencies:
