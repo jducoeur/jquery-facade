@@ -35,7 +35,7 @@ trait JQueryPromise extends js.Object {
   /**
    * Add handlers to be called when the Deferred object is resolved, rejected, or still in progress.
    */
-  def then(
+  def `then`(
     doneFilter:js.Function1[js.Any, js.Any], 
     failFilter:UndefOr[js.Function1[js.Any, js.Any]] = js.undefined,
     progressFilter:UndefOr[js.Function1[js.Any, js.Any]] = js.undefined):JQueryPromise = js.native

@@ -34,7 +34,6 @@ object JQueryStatic extends js.Object {
    * Accepts a string containing a CSS selector which is then used to match a set of elements.
    */
   def apply(): JQuery = js.native
-  def apply(selector: ElementDesc): JQuery = js.native
   def apply(selector: String, context: Element | JQuery): JQuery = js.native
   
   /**
@@ -45,7 +44,7 @@ object JQueryStatic extends js.Object {
    */
   def apply(html:String, ownerDocument:dom.html.Document):JQuery = js.native
   def apply(html:String, attributes:js.Dictionary[js.Any]):JQuery = js.native
-  def apply(obj: js.Object): JQuery = js.native
+  def apply(obj: ElementDesc | js.Object): JQuery = js.native
   
   /**
    * Binds a function to be executed when the DOM has finished loading.

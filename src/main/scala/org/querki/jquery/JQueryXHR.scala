@@ -12,5 +12,5 @@ trait JQueryXHR extends XMLHttpRequest with JQueryDeferred {
   def done(handler:js.Function3[js.Any, String, JQueryXHR, Any]):JQueryXHR = js.native
   def fail(handler:js.Function3[JQueryXHR, String, String, Any]):JQueryXHR = js.native
   def overrideMimeType(): js.Dynamic = js.native
-  def then(doneCallback:js.Function3[js.Any, String, JQueryXHR, Any], failCallback:js.Function3[JQueryXHR, String, String, Any]):JQueryXHR = js.native
+  def `then`(doneCallback:js.Function3[js.Any, String, JQueryXHR, Any], failCallback:js.Function3[JQueryXHR, String, String, Any]):JQueryXHR = js.native
 }

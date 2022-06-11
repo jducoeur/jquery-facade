@@ -42,7 +42,7 @@ class JQueryExtensions(jq:JQuery) {
    * around $.each(), but is typically easier to use.
    */
   def foreach(func:Element => Unit):JQuery = {
-    jq.each({ e:Element =>
+    jq.each({ (e:Element) =>
       func(e)
     }:js.ThisFunction0[Element, Any])
     jq

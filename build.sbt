@@ -9,17 +9,17 @@ version := "2.0"
 
 organization := "org.querki"
 
-scalaVersion := "2.13.1"
+scalaVersion := "3.1.0"
 
-scalacOptions in ThisBuild ++= Seq("-feature", "-deprecation")
+ThisBuild / scalacOptions ++= Seq("-feature", "-deprecation")
 
-crossScalaVersions := Seq("2.12.10", "2.13.1")
+crossScalaVersions := Seq("2.13.1", "2.12.10", "2.13.1")
 
 libraryDependencies ++= Seq(
   "org.querki" %%% "querki-jsext" % "0.10",
-  "org.scala-js" %%% "scalajs-dom" % "0.9.8"
+  "org.scala-js" %%% "scalajs-dom" % "2.0.0"
 )
 
-jsEnv in Test := new org.scalajs.jsenv.jsdomnodejs.JSDOMNodeJSEnv
+Test / jsEnv := new org.scalajs.jsenv.jsdomnodejs.JSDOMNodeJSEnv
 
 publishTo := sonatypePublishToBundle.value
