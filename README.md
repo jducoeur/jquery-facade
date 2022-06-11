@@ -156,6 +156,8 @@ Note that there is no enforcing of the library version you are using but there c
 
 ### What's New
 
+* **2.1** -- Now supports Scala 3.1 -- thanks to @tflucke for pushing that along!
+
 * **2.0** -- Now supports Scala 2.13 and Scala.js 1.0, thanks to @cquiroz and @frne.
 Also fixes a bug in `.scrollTop` thanks to @munkel.
 
